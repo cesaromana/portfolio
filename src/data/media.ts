@@ -25,6 +25,7 @@ export const tracks: Track[] = [
   { kind: 'track', id: '0LRgY9XAxrghqLDAaJ3o1v', title: 'Buenos Tiempos', artist: 'Dillom' },
   { kind: 'track', id: '1Fcp74jdEpOohdgPCCGI8f', title: 'Halfway There', artist: 'Big Time Rush' },
   { kind: 'track', id: '5N3hjp1WNayUPZrA8kJmJP', title: 'Please Please Please', artist: 'Sabrina Carpenter' },
+  { kind: 'track', id: '02sy7FAs8dkDNYsHp4Ul3f', title: 'Soda Pop', artist: 'Saja Boys' },
 ];
 
 /**

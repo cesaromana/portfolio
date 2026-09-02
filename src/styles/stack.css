@@ -73,7 +73,8 @@
   opacity: 0.6;
 }
 
-.sticker:hover figcaption {
+.sticker:hover figcaption,
+.sticker.is-held figcaption {
   opacity: 1;
 }
 

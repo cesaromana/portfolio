@@ -69,10 +69,6 @@
     height: calc(100% - 56px);
   }
 
-  .sticker.is-focus figcaption {
-    opacity: 1;
-  }
-
   /* Cualquier cosa pulsable responde al dedo antes de soltarlo. */
   .btn:active,
   .arcade__choice:active,

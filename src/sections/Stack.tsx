@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { iconUrl, ODOO_ICON, tools } from '../data/stack';
 import { S } from '../i18n/strings';
 import { useLang } from '../i18n/useLang';
-import { useSpotlight } from '../hooks/useSpotlight';
 import { useWall } from '../stack/useWall';
 
 const ODOO = { id: 'odoo', name: 'Odoo', size: 96 };
@@ -24,12 +23,12 @@ export default function Stack() {
   }, []);
   const scale = isNarrow ? SMALL_SCALE : 1;
   const wall = useWall(root, ALL.map((x) => Math.round(x.size * scale)));
-  useSpotlight(root, '.sticker');
 
   const grab = (i: number) => (e: React.PointerEvent<HTMLElement>) => {
     const body = wall.bodies[i];
     const el = e.currentTarget;
     el.setPointerCapture(e.pointerId);
+    el.classList.add('is-held');
     body.held = true;
     let lastX = e.clientX;
     let lastY = e.clientY;
@@ -45,6 +44,7 @@ export default function Stack() {
     };
     const drop = () => {
       body.held = false;
+      el.classList.remove('is-held');
       el.removeEventListener('pointermove', move);
       el.removeEventListener('pointerup', drop);
       el.removeEventListener('pointercancel', drop);
