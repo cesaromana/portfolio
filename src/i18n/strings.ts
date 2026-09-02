@@ -179,7 +179,7 @@ export const S = {
   facts: {
     base: bi('Base', 'Based in'),
     born: bi('Nacido', 'Born'),
-    bornOn: bi('30 septiembre 2002', 'September 30, 2002'),
+    bornOn: bi('30 septiembre 2002 · Mérida', 'September 30, 2002 · Mérida'),
     degree: bi('Título', 'Degree'),
     degreeValue: bi('Ing. en Computación · UJAP 2024', 'Computer Engineering · UJAP 2024'),
     now: bi('Ahora', 'Now'),

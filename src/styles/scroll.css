@@ -1,10 +1,15 @@
 /* ===== La barra de desplazamiento, en el lenguaje de la página =====
-   Se estiliza la barra nativa; el desplazamiento sigue siendo el del navegador.
-   Sustituirlo por uno propio es lo que rompe la inercia del dedo en el teléfono. */
+   Se estiliza la barra del sistema; el desplazamiento sigue siendo el nativo,
+   que es el que respeta la inercia del dedo y el rebote del teléfono. */
 
 html {
-  scrollbar-color: var(--ink) var(--paper-2);
+  scrollbar-color: #16130f #e3daca;
   scrollbar-width: thin;
+}
+
+/* Las variables de tema viven en body; html necesita su propio juego. */
+html.night-boot {
+  scrollbar-color: #efe9dd #1c1917;
 }
 
 /* WebKit y Blink admiten el detalle completo: raíl con trama y tirador de tinta. */

@@ -4,6 +4,7 @@ export const profile = {
   name: ['César', 'Omaña'],
   handle: 'cesaromana',
   city: bi('Valencia, Venezuela', 'Valencia, Venezuela'),
+  birthplace: bi('Mérida, Venezuela', 'Mérida, Venezuela'),
   born: '2002-09-30',
   links: {
     github: 'https://github.com/cesaromana',
@@ -19,8 +20,8 @@ export const profile = {
 // Lo que dice el globo del hero. Primera persona, sin poses.
 export const heroBalloon = [
   bi(
-    'Ingeniero en computación. Nací en Valencia el 30 de septiembre de 2002 y sigo aquí.',
-    'Computer engineer. Born in Valencia on September 30, 2002, and still here.',
+    'Ingeniero en computación. Nací en Mérida el 30 de septiembre de 2002 y vivo en Valencia.',
+    'Computer engineer. Born in Mérida on September 30, 2002, living in Valencia.',
   ),
   bi(
     'Me especializo en backend, pero trabajo la aplicación completa: la API, la base de datos y la pantalla que la usa.',
