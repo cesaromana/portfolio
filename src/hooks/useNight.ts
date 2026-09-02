@@ -14,6 +14,9 @@ export function useNight() {
 
   useEffect(() => {
     document.body.classList.toggle('night', night);
+    // La clase del <html> pinta el fondo antes del primer repintado; si no se
+    // mantiene en sincronía, al pasar a papel queda fondo oscuro con tinta clara.
+    document.documentElement.classList.toggle('night-boot', night);
     try {
       localStorage.setItem(KEY, night ? '1' : '0');
     } catch {
