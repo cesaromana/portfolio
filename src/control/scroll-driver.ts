@@ -1,6 +1,6 @@
-// Cuánta página recorre un centímetro de dedo. A 1 sería idéntico al móvil,
-// pero la página es mucho más alta que la pantalla del teléfono.
-const GAIN = 1.9;
+// Pantallas de página que recorre un arrastre completo de la zona del mando.
+// Es la relación que hace que se sienta natural: un gesto, una pantalla y media.
+const SCREENS_PER_DRAG = 1.6;
 // Cuánto se frena la inercia en cada fotograma tras soltar.
 const FRICTION = 0.94;
 // Por debajo de esto la inercia se considera terminada.
@@ -19,8 +19,9 @@ export class ScrollDriver {
   private isCoasting = false;
   private raf = 0;
 
-  push(dy: number) {
-    this.pending += dy * GAIN;
+  /** `fraction` es el recorrido del dedo respecto a la zona de arrastre. */
+  push(fraction: number) {
+    this.pending += fraction * window.innerHeight * SCREENS_PER_DRAG;
     this.isCoasting = false;
     this.start();
   }

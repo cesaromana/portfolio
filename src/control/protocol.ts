@@ -9,6 +9,8 @@ export type PhoneMsg =
   | ({ t: 'orient' } & Orient)
   | { t: 'press'; down: boolean }
   | { t: 'button'; name: ButtonName; down: boolean }
+  // dy va como fracción de la zona de arrastre del teléfono, no en píxeles:
+  // así el recorrido se siente igual venga de la pantalla que venga.
   | { t: 'scroll'; dy: number; end?: boolean }
   | { t: 'recalibrate' };
 

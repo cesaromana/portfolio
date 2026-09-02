@@ -15,6 +15,7 @@ export default function Pad({ section, send }: Props) {
   const lastY = useRef<number | null>(null);
   const pending = useRef(0);
   const raf = useRef(0);
+  const zone = useRef<HTMLDivElement>(null);
 
   useEffect(() => () => cancelAnimationFrame(raf.current), []);
 
@@ -36,7 +37,10 @@ export default function Pad({ section, send }: Props) {
 
   const move = (e: React.PointerEvent) => {
     if (lastY.current === null) return;
-    pending.current += lastY.current - e.clientY;
+    // Se manda la fracción recorrida, no los píxeles: la pantalla de destino
+    // decide cuánta página es eso.
+    const height = zone.current?.clientHeight || 1;
+    pending.current += (lastY.current - e.clientY) / height;
     lastY.current = e.clientY;
     queue();
   };
@@ -56,6 +60,7 @@ export default function Pad({ section, send }: Props) {
   return (
     <div className="phone__main phone__pad-wrap">
       <div
+        ref={zone}
         className="phone__swipe mono"
         onPointerDown={down}
         onPointerMove={move}
