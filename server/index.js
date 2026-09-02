@@ -50,8 +50,9 @@ app.get('*path', (req, res) => {
   return res.sendFile(path.join(DIST, 'index.html'));
 });
 
-plain.listen(PORT, '0.0.0.0', () => announce('http', PORT));
-secure?.listen(HTTPS_PORT, '0.0.0.0', () => announce('https', HTTPS_PORT));
+// Sin host explícito Node escucha en IPv4 e IPv6; atarlo a 0.0.0.0 deja fuera ::1.
+plain.listen(PORT, () => announce('http', PORT));
+secure?.listen(HTTPS_PORT, () => announce('https', HTTPS_PORT));
 
 function announce(scheme, port) {
   const hosts = ['localhost', ...lanAddresses()];

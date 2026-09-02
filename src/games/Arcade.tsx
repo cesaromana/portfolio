@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { PointerLoop } from '../control/pointer-loop';
 import { useTilt } from '../hooks/useTilt';
@@ -28,6 +28,16 @@ export default function Arcade({ remote, isTouch }: Props) {
   const entry = id ? entryOf(id) : null;
   const game = useMemo(() => entry?.make() ?? null, [entry, round]);
   const isTilting = isTouch && !remote && permission === 'granted';
+  const isFull = isTouch && id !== null;
+
+  useEffect(() => {
+    if (!isFull) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [isFull]);
 
   const onHud = useCallback(
     (h: Hud) => setHud((old) => (old.score === h.score && old.extra === h.extra && old.isOver === h.isOver ? old : h)),

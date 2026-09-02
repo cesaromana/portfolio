@@ -9,6 +9,10 @@ html {
   overflow-x: clip;
 }
 
+html.night-boot body {
+  background: #131110;
+}
+
 body {
   margin: 0;
   background: var(--paper);

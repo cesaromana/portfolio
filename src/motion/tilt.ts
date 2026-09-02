@@ -7,6 +7,8 @@ type Listener = (v: Vec) => void;
 const RANGE_DEG = 22;
 // La lectura cruda tiembla; se suaviza hacia el objetivo en cada evento.
 const SMOOTH = 0.18;
+// Por debajo de esto se considera que el teléfono está recto.
+const DEAD = 0.06;
 
 /**
  * Fuente única de inclinación del teléfono. Un solo listener para toda la
@@ -37,9 +39,13 @@ class TiltSource {
     this.listen();
   }
 
-  /** La postura actual pasa a ser el centro. */
+  /**
+   * La postura actual pasa a ser el centro. Si todavía no ha llegado ninguna
+   * lectura, se deja vacía: la fija la primera que entre. Poner {0,0} aquí
+   * mandaba la gravedad al tope en cuanto llegaba el primer dato real.
+   */
   recenter() {
-    this.base = { ...this.raw };
+    this.base = null;
     this.value = { x: 0, y: 0 };
   }
 
@@ -62,8 +68,8 @@ class TiltSource {
     this.raw = rotate({ x: e.gamma ?? 0, y: e.beta ?? 0 });
     if (!this.base) this.base = { ...this.raw };
     const target = {
-      x: clamp((this.raw.x - this.base.x) / RANGE_DEG),
-      y: clamp((this.raw.y - this.base.y) / RANGE_DEG),
+      x: dead(clamp((this.raw.x - this.base.x) / RANGE_DEG)),
+      y: dead(clamp((this.raw.y - this.base.y) / RANGE_DEG)),
     };
     this.value = {
       x: this.value.x + (target.x - this.value.x) * SMOOTH,
@@ -84,6 +90,10 @@ function rotate(v: Vec): Vec {
 
 function clamp(n: number) {
   return Math.max(-1, Math.min(1, n));
+}
+
+function dead(n: number) {
+  return Math.abs(n) < DEAD ? 0 : n;
 }
 
 export const tilt = new TiltSource();

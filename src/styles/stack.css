@@ -291,7 +291,8 @@ footer,
   font-style: italic;
 }
 
-/* Etiqueta propia para cualquier control: sustituye al tooltip del navegador. */
+/* Etiqueta propia para cualquier control: sustituye al tooltip del navegador.
+   Se revela con opacidad, no recortando: un recorte a medias deja un trozo suelto. */
 [data-tip] {
   position: relative;
 }
@@ -299,9 +300,9 @@ footer,
 [data-tip]::after {
   content: attr(data-tip);
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 10px);
   right: 0;
-  z-index: 20;
+  z-index: 30;
   white-space: nowrap;
   font-family: var(--mono);
   font-size: 11px;
@@ -310,15 +311,18 @@ footer,
   background: var(--marker);
   color: #16130f;
   border: 2px solid var(--ink);
-  padding: 4px 8px;
+  padding: 5px 9px;
   pointer-events: none;
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 220ms var(--ease-out);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
 }
 
 [data-tip]:hover::after,
 [data-tip]:focus-visible::after {
-  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 260ms;
 }
 
 @media (hover: none) {

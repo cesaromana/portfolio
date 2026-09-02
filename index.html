@@ -3,15 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#EFE9DD" />
+    <meta name="theme-color" content="#131110" />
     <meta name="description" content="César Omaña. Computer engineer from Valencia, Venezuela. Backend first, full stack always, games on the side." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Martian+Mono:wght@500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23EFE9DD'/%3E%3Crect x='3' y='3' width='26' height='26' fill='none' stroke='%2316130F' stroke-width='3'/%3E%3Ctext x='16' y='23' font-family='monospace' font-weight='700' font-size='18' text-anchor='middle' fill='%23E3462F'%3EC%3C/text%3E%3C/svg%3E" />
     <title>César Omaña</title>
+    <script>
+      // Tinta nocturna por defecto: se aplica antes del primer pintado.
+      try {
+        if (localStorage.getItem('tinta-nocturna') !== '0') document.documentElement.classList.add('night-boot');
+      } catch (e) {}
+    </script>
   </head>
-  <body>
+  <body class="boot">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
