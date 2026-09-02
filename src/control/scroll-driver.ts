@@ -14,16 +14,16 @@ const VELOCITY_MIX = 0.35;
  * se sienta continuo en vez de a tirones. Al soltar el dedo queda inercia.
  */
 export class ScrollDriver {
-  private pending = 0;
   private velocity = 0;
   private isCoasting = false;
   private raf = 0;
 
   /** `fraction` es el recorrido del dedo respecto a la zona de arrastre. */
   push(fraction: number) {
-    this.pending += fraction * window.innerHeight * SCREENS_PER_DRAG;
+    const dy = fraction * window.innerHeight * SCREENS_PER_DRAG;
     this.isCoasting = false;
-    this.start();
+    this.velocity += (dy - this.velocity) * VELOCITY_MIX;
+    window.scrollBy(0, dy);
   }
 
   /** El dedo se levantó: sigue rodando con lo que llevaba. */
@@ -35,7 +35,6 @@ export class ScrollDriver {
   stop() {
     cancelAnimationFrame(this.raf);
     this.raf = 0;
-    this.pending = 0;
     this.velocity = 0;
     this.isCoasting = false;
   }
@@ -47,13 +46,7 @@ export class ScrollDriver {
 
   private step = () => {
     this.raf = 0;
-    if (this.isCoasting) return this.coast();
-
-    const dy = this.pending;
-    this.pending = 0;
-    this.velocity += (dy - this.velocity) * VELOCITY_MIX;
-    if (dy !== 0) window.scrollBy(0, dy);
-    this.start();
+    if (this.isCoasting) this.coast();
   };
 
   private coast() {

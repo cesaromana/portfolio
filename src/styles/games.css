@@ -173,7 +173,9 @@
   inset: 0;
   z-index: 60;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  /* minmax(0,1fr): sin el mínimo en cero el lienzo se estira con su altura
+     intrínseca y empuja los botones fuera de la pantalla. */
+  grid-template-rows: auto minmax(0, 1fr) auto;
   border: 0;
   box-shadow: none;
   background: var(--night);
@@ -189,6 +191,7 @@
 
 .arcade__stage--full .arcade__canvas {
   height: 100%;
+  min-height: 0;
 }
 
 /* ===== Botones del pulgar ===== */
@@ -462,58 +465,6 @@
   border-color: var(--night-red);
 }
 
-/* Girado: el juego corre a lo largo del teléfono, que es donde se ve grande. */
-.gameboy--rotated {
-  inset: auto;
-  top: 50%;
-  left: 50%;
-  width: 100dvh;
-  height: 100dvw;
-  transform: translate(-50%, -50%) rotate(90deg);
-  transform-origin: center;
-  grid-template-rows: 1fr;
-  grid-template-columns: auto 1fr auto;
-  align-content: stretch;
-  align-items: center;
-  gap: 10px;
-  padding: 8px;
-  animation: none;
-}
-
-.gameboy--rotated .gameboy__screen {
-  grid-column: 2;
-  grid-row: 1;
-  width: 100%;
-  height: 100%;
-  align-self: stretch;
-  border: var(--rule) solid var(--night-paper);
-}
-
-.gameboy--rotated .gameboy__pad {
-  display: contents;
-}
-
-.gameboy--rotated .dpad {
-  grid-column: 1;
-  grid-row: 1;
-  grid-template-columns: repeat(3, 50px);
-  grid-template-rows: repeat(3, 50px);
-  align-self: center;
-}
-
-.gameboy--rotated .gameboy__ab {
-  grid-column: 3;
-  grid-row: 1;
-  align-self: center;
-}
-
-.gameboy--rotated .gameboy__bar {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  padding: 0;
-}
-
 /* ===== Joystick del pulgar ===== */
 .stick {
   position: relative;
@@ -558,11 +509,3 @@
   transition: none;
 }
 
-.gameboy--rotated .stick {
-  grid-column: 1;
-  grid-row: 1;
-  justify-self: center;
-  align-self: center;
-  width: 126px;
-  height: 126px;
-}

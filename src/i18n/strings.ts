@@ -140,8 +140,6 @@ export const S = {
     sonicIdle: bi('Gotta go fast', 'Gotta go fast'),
     sonicPlay: bi('Jugar aquí', 'Play here'),
     sonicKeys: bi('Flechas para moverse · espacio para saltar', 'Arrows to move · space to jump'),
-    sonicRotate: bi('Girar', 'Rotate'),
-    sonicUpright: bi('Vertical', 'Upright'),
     sonicNote: bi(
       'Lo primero que quise programar fue un Sonic. Todavía no lo he hecho, así que mientras tanto: este.',
       'The first thing I ever wanted to program was a Sonic game. Still have not, so in the meantime: this one.',

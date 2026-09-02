@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import { fitFrame } from './fit-frame';
 import { S } from '../i18n/strings';
 import { useLang } from '../i18n/useLang';
@@ -21,7 +21,6 @@ const DEAD = 0.34;
 export default function GameBoy({ src, onClose }: Props) {
   const { t } = useLang();
   const frame = useRef<HTMLIFrameElement>(null);
-  const [isRotated, setRotated] = useState(false);
 
   const key = (name: KeyName, isDown: boolean) => {
     const win = frame.current?.contentWindow;
@@ -63,7 +62,7 @@ export default function GameBoy({ src, onClose }: Props) {
   });
 
   return (
-    <div className={`gameboy${isRotated ? ' gameboy--rotated' : ''}`} role="dialog" aria-label="Open Sonic">
+    <div className="gameboy" role="dialog" aria-label="Open Sonic">
       <div className="gameboy__screen gb-in" style={{ animationDelay: '120ms' }}>
         <iframe ref={frame} title="Open Sonic" src={src} allow="gamepad" onLoad={() => fitFrame(frame.current)} />
       </div>
@@ -81,9 +80,6 @@ export default function GameBoy({ src, onClose }: Props) {
       </div>
 
       <div className="gameboy__bar gb-in" style={{ animationDelay: '880ms' }}>
-        <button className="btn" onClick={() => setRotated((r) => !r)}>
-          {isRotated ? t(S.about.sonicUpright) : t(S.about.sonicRotate)}
-        </button>
         <button className="btn btn--red" onClick={onClose}>
           {t(S.arcade.back)}
         </button>

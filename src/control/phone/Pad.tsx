@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import type { ButtonName, PhoneMsg } from '../protocol';
 
 const HAPTIC_MS = 12;
@@ -13,22 +13,7 @@ type Props = { section: string; send: (m: PhoneMsg) => void };
  */
 export default function Pad({ section, send }: Props) {
   const lastY = useRef<number | null>(null);
-  const pending = useRef(0);
-  const raf = useRef(0);
   const zone = useRef<HTMLDivElement>(null);
-
-  useEffect(() => () => cancelAnimationFrame(raf.current), []);
-
-  const flush = () => {
-    raf.current = 0;
-    const dy = pending.current;
-    pending.current = 0;
-    if (dy !== 0) send({ t: 'scroll', dy });
-  };
-
-  const queue = () => {
-    if (raf.current === 0) raf.current = requestAnimationFrame(flush);
-  };
 
   const down = (e: React.PointerEvent) => {
     lastY.current = e.clientY;
@@ -37,18 +22,18 @@ export default function Pad({ section, send }: Props) {
 
   const move = (e: React.PointerEvent) => {
     if (lastY.current === null) return;
-    // Se manda la fracción recorrida, no los píxeles: la pantalla de destino
-    // decide cuánta página es eso.
+    // Se manda la fracción recorrida, no los píxeles: la pantalla decide cuánta
+    // página es eso. Los eventos ya vienen al ritmo del dedo, así que se envían
+    // tal cual; agruparlos aquí dependía de que el teléfono siguiera pintando.
     const height = zone.current?.clientHeight || 1;
-    pending.current += (lastY.current - e.clientY) / height;
+    const dy = (lastY.current - e.clientY) / height;
     lastY.current = e.clientY;
-    queue();
+    if (dy !== 0) send({ t: 'scroll', dy });
   };
 
   const up = () => {
     if (lastY.current === null) return;
     lastY.current = null;
-    flush();
     send({ t: 'scroll', dy: 0, end: true });
   };
 
