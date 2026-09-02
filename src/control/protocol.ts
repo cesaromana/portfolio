@@ -9,7 +9,7 @@ export type PhoneMsg =
   | ({ t: 'orient' } & Orient)
   | { t: 'press'; down: boolean }
   | { t: 'button'; name: ButtonName; down: boolean }
-  | { t: 'scroll'; dy: number }
+  | { t: 'scroll'; dy: number; end?: boolean }
   | { t: 'recalibrate' };
 
 export type Phase = 'waiting' | 'calibrating' | 'ready' | 'lost';

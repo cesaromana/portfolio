@@ -5,10 +5,14 @@ import type { InputBus } from './input';
 // Con dos dedos en pantalla, el segundo hace de botón B.
 const SECOND_FINGER_IS_B = true;
 
-/** El teléfono como mando de la PC: puntero absoluto sobre la ventana. */
-export function bindRemote(loop: PointerLoop, bus: InputBus) {
+/**
+ * El teléfono como mando: la retícula vive en coordenadas de ventana, así que
+ * hay que traducirla a la caja del lienzo. Si no, se dispara desplazado.
+ */
+export function bindRemote(loop: PointerLoop, bus: InputBus, el: HTMLCanvasElement) {
   return loop.subscribe((p) => {
-    bus.point(p.x / window.innerWidth, p.y / window.innerHeight);
+    const r = el.getBoundingClientRect();
+    bus.point((p.x - r.left) / r.width, (p.y - r.top) / r.height);
     bus.button('a', p.pressed || p.a);
     bus.button('b', p.b);
   });

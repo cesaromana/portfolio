@@ -1,15 +1,33 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import type { ButtonName, PhoneMsg } from '../protocol';
 
-// Un centímetro de dedo mueve más que un centímetro de página: si no, no se llega.
-const SCROLL_GAIN = 2.6;
 const HAPTIC_MS = 12;
 
 type Props = { section: string; send: (m: PhoneMsg) => void };
 
-/** Mando: arriba se desliza la página con el dedo, abajo los botones A y B. */
+/**
+ * Mando: arriba se arrastra la página, abajo los botones A y B.
+ *
+ * El desplazamiento se acumula y se manda una vez por fotograma. Enviar cada
+ * evento del dedo suelto satura el canal y se siente a tirones.
+ */
 export default function Pad({ section, send }: Props) {
   const lastY = useRef<number | null>(null);
+  const pending = useRef(0);
+  const raf = useRef(0);
+
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
+
+  const flush = () => {
+    raf.current = 0;
+    const dy = pending.current;
+    pending.current = 0;
+    if (dy !== 0) send({ t: 'scroll', dy });
+  };
+
+  const queue = () => {
+    if (raf.current === 0) raf.current = requestAnimationFrame(flush);
+  };
 
   const down = (e: React.PointerEvent) => {
     lastY.current = e.clientY;
@@ -18,13 +36,16 @@ export default function Pad({ section, send }: Props) {
 
   const move = (e: React.PointerEvent) => {
     if (lastY.current === null) return;
-    const dy = lastY.current - e.clientY;
+    pending.current += lastY.current - e.clientY;
     lastY.current = e.clientY;
-    if (dy !== 0) send({ t: 'scroll', dy: dy * SCROLL_GAIN });
+    queue();
   };
 
   const up = () => {
+    if (lastY.current === null) return;
     lastY.current = null;
+    flush();
+    send({ t: 'scroll', dy: 0, end: true });
   };
 
   const press = (name: ButtonName, isDown: boolean) => {

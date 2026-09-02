@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { PointerLoop } from '../control/pointer-loop';
 import { InputBus } from './input';
-import { bindKeys, bindRemote, bindTilt } from './sources';
+import { bindKeys, bindTilt } from './sources';
 
 /**
  * Bus de entrada estable con las fuentes que no dependen del lienzo: el
@@ -10,8 +10,6 @@ import { bindKeys, bindRemote, bindTilt } from './sources';
  */
 export function useGameInput(remote: PointerLoop | null) {
   const bus = useRef(new InputBus());
-
-  useEffect(() => (remote ? bindRemote(remote, bus.current) : undefined), [remote]);
 
   useEffect(() => (remote ? undefined : bindTilt(bus.current)), [remote]);
 

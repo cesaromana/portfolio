@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { readPalette, type Game, type Hud } from './game';
 import type { InputBus } from './input';
-import { bindPointer } from './sources';
+import type { PointerLoop } from '../control/pointer-loop';
+import { bindPointer, bindRemote } from './sources';
 
 type Props = {
   game: Game;
@@ -9,6 +10,7 @@ type Props = {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
   onHud: (h: Hud) => void;
   round: number;
+  remote: PointerLoop | null;
 };
 
 const MAX_DT = 1 / 20;
@@ -20,7 +22,7 @@ const MAX_DPR = 2;
  * teléfono la barra del navegador aparece y desaparece constantemente, y si
  * cada cambio de alto reiniciara la partida el juego se rompería solo.
  */
-export default function GameCanvas({ game, bus, canvasRef, onHud, round }: Props) {
+export default function GameCanvas({ game, bus, canvasRef, onHud, round, remote }: Props) {
   const size = useRef({ w: 0, h: 0 });
   const [isSized, setSized] = useState(false);
 
@@ -44,12 +46,12 @@ export default function GameCanvas({ game, bus, canvasRef, onHud, round }: Props
     const ro = new ResizeObserver(measure);
     ro.observe(el);
     measure();
-    const offPointer = bindPointer(el, bus);
+    const offPointer = remote ? bindRemote(remote, bus, el) : bindPointer(el, bus);
     return () => {
       ro.disconnect();
       offPointer();
     };
-  }, [canvasRef, bus]);
+  }, [canvasRef, bus, remote]);
 
   useEffect(() => {
     const el = canvasRef.current;

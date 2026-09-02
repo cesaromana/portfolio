@@ -2,6 +2,7 @@ import Peer, { type DataConnection } from 'peerjs';
 import { BLOCKS, Calibrator, TICK_MS } from './calibration';
 import { peerOptions } from './peer-config';
 import { PointerLoop } from './pointer-loop';
+import { ScrollDriver } from './scroll-driver';
 import { orientToPoint } from './pointer-map';
 import { SECTIONS, type DesktopMsg, type HintKey, type Orient, type Phase, type PhoneMsg } from './protocol';
 
@@ -17,6 +18,7 @@ const HAPTIC = { ready: 40, section: 30, click: 12 };
 /** Lado PC del mando: señalización, calibración y estado. */
 export class SenseSession {
   readonly pointer = new PointerLoop();
+  private scroller = new ScrollDriver();
   state: SenseState = { peerId: null, phase: 'waiting', progress: 0, hint: HINT_WAIT, section: SECTIONS[0].id, error: null };
   private peer: Peer;
   private conn: DataConnection | null = null;
@@ -34,6 +36,7 @@ export class SenseSession {
   }
 
   destroy() {
+    this.scroller.stop();
     this.stopTicker();
     this.pointer.stop();
     this.peer.destroy();
@@ -73,7 +76,7 @@ export class SenseSession {
     if (m.t === 'orient') return this.orient({ a: m.a, b: m.b, g: m.g });
     if (m.t === 'press') return this.press(m.down);
     if (m.t === 'button') return this.button(m.name, m.down);
-    if (m.t === 'scroll') return this.scroll(m.dy);
+    if (m.t === 'scroll') return this.scroll(m.dy, m.end);
   }
 
   private orient(o: Orient) {
@@ -95,8 +98,9 @@ export class SenseSession {
     if (isDown) this.send({ t: 'haptic', ms: HAPTIC.click });
   }
 
-  private scroll(dy: number) {
-    window.scrollBy({ top: dy, behavior: 'auto' });
+  private scroll(dy: number, isEnd?: boolean) {
+    if (isEnd) this.scroller.release();
+    else this.scroller.push(dy);
     const id = sectionAtCenter();
     if (id && id !== this.state.section) {
       this.send({ t: 'haptic', ms: HAPTIC.section });

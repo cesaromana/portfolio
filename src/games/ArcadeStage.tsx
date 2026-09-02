@@ -2,6 +2,7 @@ import Buttons from './Buttons';
 import GameCanvas from './GameCanvas';
 import type { Game, Hud } from './game';
 import type { InputBus } from './input';
+import type { PointerLoop } from '../control/pointer-loop';
 import { S } from '../i18n/strings';
 import { useLang } from '../i18n/useLang';
 
@@ -17,11 +18,12 @@ type Props = {
   isTouch: boolean;
   title: string;
   hint: string;
+  remote: PointerLoop | null;
 };
 
 /** La partida en curso: marcador, lienzo y, en teléfono, los botones del pulgar. */
 export default function ArcadeStage(props: Props) {
-  const { game, bus, canvasRef, round, hud, onHud, onBack, onAgain, isTouch, title, hint } = props;
+  const { game, bus, canvasRef, round, hud, onHud, onBack, onAgain, isTouch, title, hint, remote } = props;
   const { t } = useLang();
 
   return (
@@ -37,7 +39,7 @@ export default function ArcadeStage(props: Props) {
         </button>
       </div>
 
-      <GameCanvas game={game} bus={bus} canvasRef={canvasRef} onHud={onHud} round={round} />
+      <GameCanvas game={game} bus={bus} canvasRef={canvasRef} onHud={onHud} round={round} remote={remote} />
 
       {isTouch && <Buttons bus={bus} hint={hint} />}
       {!isTouch && <p className="arcade__touch mono mono--sm">{hint}</p>}

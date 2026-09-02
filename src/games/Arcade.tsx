@@ -85,6 +85,7 @@ export default function Arcade({ remote, isTouch }: Props) {
       isTouch={isTouch}
       title={t(entry.title)}
       hint={t(isTilting ? entry.tiltHow : entry.how)}
+      remote={remote}
     />
   );
 
