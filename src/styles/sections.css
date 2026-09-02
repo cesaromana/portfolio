@@ -244,9 +244,31 @@ body.night .night-toggle::after {
 .p-n8n { grid-column: 8 / 13; }
 
 @media (max-width: 960px) {
-  .strip { grid-auto-rows: 210px; }
-  .p-recuerdos, .p-gatos, .p-n8n { grid-column: 1 / 13; grid-row: span 1; }
-  .p-recuerdos { grid-row: span 2; }
+  /* Alto automático: con filas fijas el texto no cabía y el título acababa
+     encima del arte y del número de viñeta. */
+  .strip {
+    grid-auto-rows: auto;
+  }
+
+  .p-recuerdos,
+  .p-gatos,
+  .p-n8n {
+    grid-column: 1 / 13;
+    grid-row: auto;
+  }
+
+  .strip .panel {
+    justify-content: flex-start;
+    padding: 140px 18px 20px;
+  }
+
+  .strip .panel h3 {
+    margin-top: 0;
+  }
+
+  .panel__art {
+    height: 118px;
+  }
 }
 
 /* ===== Expansión de proyecto ===== */
