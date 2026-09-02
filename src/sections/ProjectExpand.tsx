@@ -22,12 +22,14 @@ export default function ProjectExpand({ project, onClose }: Props) {
     <div className="expand" role="dialog" aria-modal="true" aria-labelledby="expand-title">
       <div className="expand__veil" onClick={onClose} />
       <article className="panel">
-        <button className="btn expand__close" onClick={onClose} aria-label={t(S.projects.close)}>
-          {t(S.projects.close)}
-        </button>
-        <span className="mono">
-          {t(S.projects.panel)} {project.num}
-        </span>
+        <header className="expand__bar">
+          <span className="mono">
+            {t(S.projects.panel)} {project.num}
+          </span>
+          <button className="btn" onClick={onClose} aria-label={t(S.projects.close)}>
+            {t(S.projects.close)}
+          </button>
+        </header>
         <h3 id="expand-title">{name}</h3>
         <div className="expand__body">
           <div className="expand__cols">
