@@ -513,3 +513,56 @@
   top: 8px;
   padding: 0;
 }
+
+/* ===== Joystick del pulgar ===== */
+.stick {
+  position: relative;
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  border: var(--rule) solid var(--night-paper);
+  background: rgba(239, 233, 221, 0.06);
+  box-shadow: 5px 5px 0 var(--night-paper);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  display: grid;
+  place-items: center;
+  transition: background 160ms var(--ease-out);
+}
+
+.stick.is-held {
+  background: rgba(239, 233, 221, 0.12);
+}
+
+.stick::after {
+  content: '';
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  border: 1px dashed rgba(239, 233, 221, 0.25);
+}
+
+.stick__knob {
+  position: relative;
+  z-index: 1;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--night-red);
+  border: var(--rule) solid var(--night-paper);
+  transition: transform 120ms var(--ease-out);
+}
+
+.stick.is-held .stick__knob {
+  transition: none;
+}
+
+.gameboy--rotated .stick {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  align-self: center;
+  width: 126px;
+  height: 126px;
+}

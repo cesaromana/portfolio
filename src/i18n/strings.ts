@@ -178,6 +178,18 @@ export const S = {
       lost: bi('perdido', 'lost'),
     },
   },
+  facts: {
+    base: bi('Base', 'Based in'),
+    born: bi('Nacido', 'Born'),
+    bornOn: bi('30 septiembre 2002', 'September 30, 2002'),
+    degree: bi('Título', 'Degree'),
+    degreeValue: bi('Ing. en Computación · UJAP 2024', 'Computer Engineering · UJAP 2024'),
+    now: bi('Ahora', 'Now'),
+    nowValue: bi('Full stack en Baleares Group', 'Full stack at Baleares Group'),
+    focus: bi('Enfoque', 'Focus'),
+    focusValue: bi('Backend, infraestructura y arquitectura', 'Backend, infrastructure and architecture'),
+    boss: bi('Supervisa', 'Supervised by'),
+  },
   foot: {
     mail: bi('Correo', 'Email'),
     phone: bi('Teléfono', 'Phone'),

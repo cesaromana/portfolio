@@ -547,3 +547,44 @@ body.night .sonic {
 .film img {
   -webkit-user-drag: none;
 }
+
+/* ===== Ficha de datos, junto a la presentación ===== */
+.facts {
+  margin: 0;
+  border-top: var(--rule) solid var(--ink);
+}
+
+.facts__row {
+  display: grid;
+  grid-template-columns: minmax(90px, 30%) 1fr;
+  gap: 6px 18px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--dots);
+  transition: padding-left 220ms var(--ease-out);
+}
+
+.facts__row:hover,
+.facts__row.is-focus {
+  padding-left: 10px;
+}
+
+.facts dt {
+  color: var(--ink-soft);
+}
+
+.facts dd {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(15px, 1.5vw, 19px);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 560px) {
+  .facts__row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

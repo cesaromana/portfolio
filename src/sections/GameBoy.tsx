@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { fitFrame } from './fit-frame';
 import { S } from '../i18n/strings';
 import { useLang } from '../i18n/useLang';
+import Stick from './Stick';
 
 type Props = { src: string; onClose: () => void };
 
@@ -10,6 +11,8 @@ const KEYS = { left: 37, up: 38, right: 39, down: 40, a: 32, start: 13 } as cons
 type KeyName = keyof typeof KEYS;
 
 const HAPTIC_MS = 8;
+// A partir de aquí el joystick cuenta como dirección pulsada.
+const DEAD = 0.34;
 
 /**
  * Consola portátil a pantalla completa. El modo girado pone el juego a lo
@@ -31,6 +34,23 @@ export default function GameBoy({ src, onClose }: Props) {
     if (isDown) navigator.vibrate?.(HAPTIC_MS);
   };
 
+  const held = useRef<Record<string, boolean>>({});
+
+  const steer = useCallback((x: number, y: number) => {
+    const wanted: Record<string, boolean> = {
+      left: x < -DEAD,
+      right: x > DEAD,
+      up: y < -DEAD,
+      down: y > DEAD,
+    };
+    for (const name of ['left', 'right', 'up', 'down'] as KeyName[]) {
+      if (held.current[name] === wanted[name]) continue;
+      held.current[name] = wanted[name];
+      key(name, wanted[name]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const hold = (name: KeyName) => ({
     onPointerDown: (e: React.PointerEvent) => {
       e.preventDefault();
@@ -49,20 +69,7 @@ export default function GameBoy({ src, onClose }: Props) {
       </div>
 
       <div className="gameboy__pad">
-        <div className="dpad">
-          <button className="dpad__btn dpad__up gb-in" style={{ animationDelay: '300ms' }} {...hold('up')} aria-label="↑">
-            ▲
-          </button>
-          <button className="dpad__btn dpad__left gb-in" style={{ animationDelay: '390ms' }} {...hold('left')} aria-label="←">
-            ◀
-          </button>
-          <button className="dpad__btn dpad__right gb-in" style={{ animationDelay: '480ms' }} {...hold('right')} aria-label="→">
-            ▶
-          </button>
-          <button className="dpad__btn dpad__down gb-in" style={{ animationDelay: '570ms' }} {...hold('down')} aria-label="↓">
-            ▼
-          </button>
-        </div>
+        <Stick onMove={steer} />
         <div className="gameboy__ab">
           <button className="gameboy__round gb-in" style={{ animationDelay: '680ms' }} {...hold('a')} aria-label="A">
             A

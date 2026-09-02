@@ -4,6 +4,7 @@ import { useReveal } from '../hooks/useReveal';
 import { S } from '../i18n/strings';
 import { useLang } from '../i18n/useLang';
 import Anime from './Anime';
+import Facts from './Facts';
 import Films from './Films';
 import Manga from './Manga';
 import Music from './Music';
@@ -25,13 +26,18 @@ export default function About() {
       </div>
 
       <div className="spread">
-        <div className="spread__row reveal">
-          <div className="balloon balloon--wide">
-            {aboutText.map((p, i) => (
-              <p key={p.es} style={{ marginTop: i ? 12 : 0 }}>
-                {t(p)}
-              </p>
-            ))}
+        <div className="spread__row spread__row--split">
+          <div className="reveal">
+            <div className="balloon balloon--wide">
+              {aboutText.map((p, i) => (
+                <p key={p.es} style={{ marginTop: i ? 12 : 0 }}>
+                  {t(p)}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="reveal" data-stagger="60">
+            <Facts />
           </div>
         </div>
 
