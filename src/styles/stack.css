@@ -1,0 +1,327 @@
+/* ===== Muro de herramientas: stickers con física ===== */
+.wall {
+  position: relative;
+  height: min(56vh, 480px);
+  overflow: hidden;
+  background-image: radial-gradient(var(--dots) 1.2px, transparent 1.3px);
+  background-size: 7px 7px;
+  touch-action: none;
+  cursor: grab;
+}
+
+.wall:active {
+  cursor: grabbing;
+}
+
+.sticker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  border: var(--rule) solid var(--ink);
+  background: var(--paper);
+  box-shadow: 4px 4px 0 var(--ink);
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.sticker img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: grayscale(1) contrast(1.1);
+  transition: filter 90ms steps(2, end);
+}
+
+.sticker:hover img {
+  filter: none;
+}
+
+.sticker__word {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.sticker figcaption {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  background: var(--marker);
+  color: #16130f;
+  padding: 2px 5px;
+  opacity: 0;
+  transition: opacity 160ms var(--ease-out);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sticker figcaption i {
+  font-style: normal;
+  opacity: 0.6;
+}
+
+.sticker:hover figcaption {
+  opacity: 1;
+}
+
+/* ===== Idioma ===== */
+.lang {
+  position: relative;
+  display: inline-flex;
+}
+
+.lang__btn {
+  position: relative;
+  display: inline-flex;
+  border: var(--rule) solid var(--ink);
+  background: transparent;
+  padding: 0;
+  height: 22px;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  overflow: hidden;
+}
+
+/* Bloque de tinta que se desliza bajo la opción activa. */
+.lang__slide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  background: var(--ink);
+  transition: transform 320ms var(--ease-flip);
+}
+
+.lang__btn--en .lang__slide {
+  transform: translateX(100%);
+}
+
+.lang__opt {
+  position: relative;
+  z-index: 1;
+  padding: 0 9px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  transition: color 220ms var(--ease-out);
+}
+
+.lang__opt.is-on {
+  color: var(--paper);
+}
+
+.lang__btn:hover .lang__opt:not(.is-on) {
+  color: var(--red);
+}
+
+/* Etiqueta propia: se despliega hacia abajo, en el estilo de la página. */
+.lang__tip {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  white-space: nowrap;
+  background: var(--marker);
+  color: #16130f;
+  border: 2px solid var(--ink);
+  padding: 4px 8px;
+  pointer-events: none;
+  transform-origin: top right;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 260ms var(--ease-out);
+}
+
+.lang__tip.is-in {
+  clip-path: inset(0 0 0 0);
+}
+
+body.is-swapping main,
+body.is-swapping footer,
+body.is-swapping .topbar nav {
+  opacity: 0;
+  transition: opacity 220ms var(--ease-out);
+}
+
+main,
+footer,
+.topbar nav {
+  transition: opacity 220ms var(--ease-out);
+}
+
+/* ===== Anime: portadas que se voltean ===== */
+.flips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 14px;
+  padding: 10px 4px 4px;
+}
+
+.flip {
+  flex: 0 0 124px;
+  aspect-ratio: 2 / 3;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  perspective: 900px;
+  transform: rotate(var(--tilt, 0deg));
+  cursor: pointer;
+  transition: transform 260ms var(--ease-flip);
+}
+
+.flip:hover,
+.flip.is-focus {
+  transform: rotate(0deg) translateY(-6px);
+}
+
+.flip__inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 520ms var(--ease-flip);
+}
+
+.flip:hover .flip__inner,
+.flip.is-open .flip__inner {
+  transform: rotateY(180deg);
+}
+
+.flip__face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  backface-visibility: hidden;
+  border: var(--rule) solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.flip__front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.flip__back {
+  transform: rotateY(180deg);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  background: var(--marker);
+  color: #16130f;
+}
+
+.flip__back b {
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 1;
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.flip__back em {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+/* ===== Series ===== */
+.series {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: var(--rule) solid var(--ink);
+  columns: 2;
+  column-gap: 52px;
+}
+
+@media (max-width: 860px) {
+  .series {
+    columns: 1;
+  }
+}
+
+.series li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--dots);
+  break-inside: avoid;
+  transition: padding-left 220ms var(--ease-out);
+}
+
+.series li:hover,
+.series li.is-focus {
+  padding-left: 12px;
+}
+
+.series li b {
+  font-family: var(--display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.series li em {
+  grid-column: 1 / -1;
+  color: var(--ink-soft);
+  font-size: 15px;
+  font-style: italic;
+}
+
+/* Etiqueta propia para cualquier control: sustituye al tooltip del navegador. */
+[data-tip] {
+  position: relative;
+}
+
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--marker);
+  color: #16130f;
+  border: 2px solid var(--ink);
+  padding: 4px 8px;
+  pointer-events: none;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 220ms var(--ease-out);
+}
+
+[data-tip]:hover::after,
+[data-tip]:focus-visible::after {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (hover: none) {
+  [data-tip]::after {
+    display: none;
+  }
+}

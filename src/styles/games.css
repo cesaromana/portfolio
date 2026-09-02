@@ -1,0 +1,515 @@
+/* ===== Sala de juegos (dentro de la sección tinta nocturna) ===== */
+.arcade {
+  margin-top: 64px;
+  --paper: var(--night);
+  --paper-2: #1c1917;
+  --ink: var(--night-paper);
+  --ink-soft: #b8afa0;
+  --red: var(--night-red);
+  --blue: var(--night-blue);
+  --dots: rgba(239, 233, 221, 0.14);
+}
+
+.arcade__menu > .mono {
+  color: #b8afa0;
+  margin-bottom: 18px;
+}
+
+.arcade__choices {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gutter);
+}
+
+.arcade__choice {
+  position: relative;
+  padding: 46px 20px 20px;
+  text-align: left;
+  color: var(--ink);
+  background: var(--paper);
+  border-color: var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+  overflow: hidden;
+  transition: transform 220ms var(--ease-flip), box-shadow 220ms var(--ease-flip);
+}
+
+.arcade__choice:hover,
+.arcade__choice.is-focus {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 var(--red);
+}
+
+.arcade__choice h3 {
+  font-size: var(--d1);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.arcade__choice p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  min-height: 3em;
+}
+
+.arcade__go {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--red);
+  transform: translateX(0);
+  transition: transform 220ms var(--ease-out);
+}
+
+.arcade__choice:hover .arcade__go,
+.arcade__choice.is-focus .arcade__go {
+  transform: translateX(8px);
+}
+
+.arcade__warn {
+  margin-top: 16px;
+  color: var(--night-red);
+}
+
+/* ===== Partida ===== */
+.arcade__stage {
+  position: relative;
+  background: var(--paper);
+  border-color: var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+  animation: stage-in 420ms var(--ease-flip);
+  overflow: hidden;
+}
+
+@keyframes stage-in {
+  from { transform: scale(0.94); clip-path: inset(0 100% 0 0); }
+  to { transform: scale(1); clip-path: inset(0); }
+}
+
+.arcade__hud {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 16px;
+  border-bottom: var(--rule) solid var(--ink);
+  color: var(--ink-soft);
+}
+
+.arcade__hud b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.arcade__name {
+  color: var(--ink);
+}
+
+.arcade__extra {
+  color: var(--marker);
+}
+
+.arcade__hud .btn {
+  margin-left: auto;
+}
+
+.arcade__canvas {
+  display: block;
+  width: 100%;
+  height: min(60vh, 560px);
+  background-image: radial-gradient(var(--dots) 1.2px, transparent 1.3px);
+  background-size: 7px 7px;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.arcade__over {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 12px;
+  background: rgba(19, 17, 16, 0.86);
+  animation: over-in 300ms var(--ease-out);
+}
+
+@keyframes over-in {
+  from { clip-path: inset(50% 0); }
+  to { clip-path: inset(0); }
+}
+
+.arcade__over h3 {
+  font-size: var(--d3);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.arcade__over .mono {
+  color: var(--ink-soft);
+}
+
+.arcade__overActions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.arcade__touch {
+  padding: 12px 16px;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--dots);
+}
+
+/* ===== Partida a pantalla completa en teléfono ===== */
+.arcade__stage--full {
+  --paper: var(--night);
+  --paper-2: #1c1917;
+  --ink: var(--night-paper);
+  --ink-soft: #b8afa0;
+  --red: var(--night-red);
+  --blue: var(--night-blue);
+  --marker: #f5d547;
+  --dots: rgba(239, 233, 221, 0.14);
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border: 0;
+  box-shadow: none;
+  background: var(--night);
+  color: var(--night-paper);
+  padding: max(8px, env(safe-area-inset-top)) 0 max(8px, env(safe-area-inset-bottom));
+  animation: full-in 420ms var(--ease-flip);
+}
+
+@keyframes full-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.arcade__stage--full .arcade__canvas {
+  height: 100%;
+}
+
+/* ===== Botones del pulgar ===== */
+.thumbs {
+  display: grid;
+  gap: 8px;
+  padding: 12px 20px 4px;
+  justify-items: center;
+}
+
+.thumbs__hint {
+  color: var(--night-paper);
+  text-align: center;
+  max-width: 34ch;
+}
+
+.thumbs__note {
+  color: #b8afa0;
+}
+
+.thumbs__row {
+  display: flex;
+  gap: 22px;
+}
+
+.thumbs__btn {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  border: var(--rule) solid var(--night-paper);
+  background: transparent;
+  color: var(--night-paper);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 32px;
+  box-shadow: 5px 5px 0 var(--night-paper);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: transform 90ms var(--ease-out), box-shadow 90ms var(--ease-out), background 90ms var(--ease-out);
+}
+
+.thumbs__btn:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--night-paper);
+}
+
+.thumbs__btn--a:active {
+  background: var(--night-red);
+  color: #131110;
+}
+
+.thumbs__btn--b:active {
+  background: var(--night-blue);
+  color: #131110;
+}
+
+@media (max-width: 960px) {
+  .arcade__choices {
+    grid-template-columns: 1fr;
+  }
+  .arcade__choice p {
+    min-height: 0;
+  }
+}
+
+/* ===== Botones A/B en la página /control ===== */
+.phone__pad-wrap {
+  grid-template-rows: 1fr auto;
+  gap: 22px;
+  align-content: stretch;
+  padding-bottom: 10px;
+}
+
+.phone__swipe {
+  position: relative;
+  width: 100%;
+  min-height: 28vh;
+  border: var(--rule) dashed rgba(239, 233, 221, 0.4);
+  display: grid;
+  place-content: center;
+  gap: 14px;
+  justify-items: center;
+  color: #b8afa0;
+  touch-action: none;
+}
+
+/* Raíl: deja claro que aquí se arrastra el dedo. */
+.phone__swipeRail {
+  width: 4px;
+  height: 96px;
+  background: linear-gradient(var(--night-red), rgba(239, 233, 221, 0.25));
+  animation: rail 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes rail {
+  from { transform: translateY(-10px); }
+  to { transform: translateY(10px); }
+}
+
+.phone__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.phone__btn {
+  height: min(24vh, 190px);
+  min-height: 120px;
+  border: var(--rule) solid var(--night-paper);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 64px;
+  color: var(--night-paper);
+  background: transparent;
+  box-shadow: 7px 7px 0 var(--night-paper);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: transform 90ms var(--ease-out), box-shadow 90ms var(--ease-out);
+}
+
+.phone__btn:active {
+  transform: translate(7px, 7px);
+  box-shadow: 0 0 0 var(--night-paper);
+}
+
+.phone__btn--a:active { background: var(--night-red); color: #131110; }
+.phone__btn--b:active { background: var(--night-blue); color: #131110; }
+
+/* ===== Consola portátil para Sonic ===== */
+.gameboy {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--night);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-content: stretch;
+  align-items: center;
+  gap: 12px;
+  padding-top: max(10px, env(safe-area-inset-top));
+  animation: gb-in 420ms var(--ease-flip);
+}
+
+@keyframes gb-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* Cada pieza entra después del deslizamiento, en cascada y suave. */
+.gb-in {
+  animation: gb-piece 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes gb-piece {
+  from { opacity: 0; transform: translateY(28px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Alto explícito: dentro de un grid, aspect-ratio no siempre gana. */
+.gameboy__screen {
+  width: 100%;
+  height: calc(100vw * 0.75);
+  border-block: var(--rule) solid var(--night-paper);
+  overflow: hidden;
+  background: #000;
+  align-self: start;
+}
+
+.gameboy__screen iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.gameboy__pad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0 20px;
+  gap: 16px;
+}
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 58px);
+  grid-template-rows: repeat(3, 58px);
+  gap: 3px;
+}
+
+.dpad__btn {
+  border: var(--rule) solid var(--night-paper);
+  background: transparent;
+  color: var(--night-paper);
+  font-size: 18px;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: background 80ms var(--ease-out), color 80ms var(--ease-out);
+}
+
+.dpad__btn:active {
+  background: var(--night-paper);
+  color: #131110;
+}
+
+.dpad__up { grid-column: 2; grid-row: 1; }
+.dpad__left { grid-column: 1; grid-row: 2; }
+.dpad__right { grid-column: 3; grid-row: 2; }
+.dpad__down { grid-column: 2; grid-row: 3; }
+
+.gameboy__ab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.gameboy__round {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: var(--rule) solid var(--night-red);
+  background: var(--night-red);
+  color: #131110;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 32px;
+  box-shadow: 5px 5px 0 var(--night-paper);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.gameboy__round:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--night-paper);
+}
+
+.gameboy__pill {
+  border: var(--rule) solid var(--night-paper);
+  background: transparent;
+  color: var(--night-paper);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 8px 16px;
+  touch-action: none;
+}
+
+.gameboy__bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 20px max(12px, env(safe-area-inset-bottom));
+}
+
+.gameboy .btn {
+  border-color: var(--night-paper);
+  color: var(--night-paper);
+  background: transparent;
+  box-shadow: 4px 4px 0 var(--night-paper);
+}
+
+.gameboy .btn--red {
+  background: var(--night-red);
+  color: #131110;
+  border-color: var(--night-red);
+}
+
+/* Girado: el juego corre a lo largo del teléfono, que es donde se ve grande. */
+.gameboy--rotated {
+  inset: auto;
+  top: 50%;
+  left: 50%;
+  width: 100dvh;
+  height: 100dvw;
+  transform: translate(-50%, -50%) rotate(90deg);
+  transform-origin: center;
+  grid-template-rows: 1fr;
+  grid-template-columns: auto 1fr auto;
+  align-content: stretch;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  animation: none;
+}
+
+.gameboy--rotated .gameboy__screen {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  align-self: stretch;
+  border: var(--rule) solid var(--night-paper);
+}
+
+.gameboy--rotated .gameboy__pad {
+  display: contents;
+}
+
+.gameboy--rotated .dpad {
+  grid-column: 1;
+  grid-row: 1;
+  grid-template-columns: repeat(3, 50px);
+  grid-template-rows: repeat(3, 50px);
+  align-self: center;
+}
+
+.gameboy--rotated .gameboy__ab {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: center;
+}
+
+.gameboy--rotated .gameboy__bar {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  padding: 0;
+}

@@ -1,0 +1,39 @@
+:root {
+  --paper: #efe9dd;
+  --paper-2: #e3daca;
+  --ink: #16130f;
+  --ink-soft: #4a443b;
+  --red: #e3462f;
+  --blue: #1b45c4;
+  --marker: #f5d547;
+  --dots: rgba(22, 19, 15, 0.14);
+
+  --night: #131110;
+  --night-paper: #efe9dd;
+  --night-red: #ff5a42;
+  --night-blue: #5c7bff;
+
+  --display: 'Bricolage Grotesque', Archivo, 'Helvetica Neue', Helvetica, sans-serif;
+  --body: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --mono: 'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --gutter: 20px;
+  --margin: 48px;
+  --rule: 2.5px;
+  --shadow: 7px 7px 0 var(--ink);
+
+  --d1: 34px;
+  --d2: clamp(40px, 4.2vw, 56px);
+  --d3: clamp(56px, 7vw, 96px);
+  --d4: clamp(72px, 13vw, 250px);
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-flip: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --margin: 20px;
+    --shadow: 5px 5px 0 var(--ink);
+  }
+}

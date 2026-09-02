@@ -1,0 +1,176 @@
+/* ===== Táctil: sin hover, el movimiento lo dan el scroll, el toque y el giro ===== */
+
+/* Marca de tinta donde cae el dedo. */
+.ink-splat {
+  position: fixed;
+  z-index: 9998;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 2px solid var(--red);
+  pointer-events: none;
+  animation: splat 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes splat {
+  from {
+    opacity: 0.9;
+    transform: scale(0.4) rotate(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: scale(4.2) rotate(24deg);
+  }
+}
+
+@media (hover: none) {
+  /* La viñeta que cruza el centro de la pantalla se desregistra sola. */
+  .panel--misreg.is-focus::before {
+    border-color: var(--red);
+    transform: translateX(2px);
+    mix-blend-mode: multiply;
+  }
+
+  .panel--misreg.is-focus::after {
+    border-color: var(--blue);
+    transform: translateY(1px);
+    mix-blend-mode: multiply;
+  }
+
+  body.night .panel--misreg.is-focus::before,
+  body.night .panel--misreg.is-focus::after {
+    mix-blend-mode: screen;
+  }
+
+  .strip .panel.is-focus {
+    border-width: 4px;
+  }
+
+  .strip .panel.is-focus .panel__art {
+    transform: translateX(-12px);
+  }
+
+  .strip .panel.is-focus h3 {
+    transform: translateX(6px);
+  }
+
+  .strip .panel.is-focus .panel__num {
+    background: var(--marker);
+    color: #16130f;
+    padding: 1px 5px;
+    margin: -1px -5px;
+  }
+
+  .section__head h2 {
+    background-size: 100% 6px;
+  }
+
+  .job.is-focus::before {
+    height: calc(100% - 56px);
+  }
+
+  .sticker.is-focus figcaption {
+    opacity: 1;
+  }
+
+  /* Cualquier cosa pulsable responde al dedo antes de soltarlo. */
+  .btn:active,
+  .arcade__choice:active,
+  .deck__track:active,
+  .film:active .film__poster {
+    transform: translate(2px, 2px);
+  }
+}
+
+/* ===== Ritmo en pantallas pequeñas ===== */
+@media (max-width: 720px) {
+  .section {
+    padding-block: 64px;
+  }
+
+  .section__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .films {
+    margin-right: calc(var(--margin) * -1);
+    padding-right: var(--margin);
+  }
+
+  .film {
+    flex: 0 0 132px;
+  }
+
+  .cover {
+    flex: 0 0 96px;
+  }
+
+  .flip {
+    flex: 0 0 104px;
+  }
+
+  .oikawa {
+    padding-block: 64px 48px;
+  }
+
+  .wall {
+    height: 52vh;
+  }
+
+  /* En un sticker pequeño solo cabe el nombre. */
+  .sticker figcaption {
+    font-size: 9px;
+    letter-spacing: 0.02em;
+  }
+
+  .sticker figcaption i {
+    display: none;
+  }
+
+  .colophon__links a {
+    font-size: clamp(34px, 11vw, 56px);
+  }
+}
+
+/* ===== Hero en teléfono: el nombre manda, y el bloque no queda flotando ===== */
+@media (max-width: 720px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 26px;
+    padding-top: 96px;
+    padding-bottom: 40px;
+  }
+
+  .hero__name {
+    order: 1;
+    font-size: clamp(56px, 19vw, 130px);
+  }
+
+  .hero__name .glyphs:nth-child(2) {
+    padding-left: 0.5em;
+  }
+
+  .hero__balloon {
+    order: 2;
+    margin-top: 0;
+    max-width: none;
+  }
+
+  .hero__balloon p {
+    font-size: 16px;
+  }
+
+  .hero__foot {
+    order: 3;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-top: 0;
+    font-size: 10px;
+  }
+}

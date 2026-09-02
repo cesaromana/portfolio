@@ -1,0 +1,159 @@
+/* Viñetas: borde sólido, radio 0, sombra dura. Nunca cards. */
+.panel {
+  position: relative;
+  border: var(--rule) solid var(--ink);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  isolation: isolate;
+}
+
+.panel--alt {
+  background: var(--paper-2);
+}
+
+.panel__num {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 3;
+  color: var(--ink);
+}
+
+/* Mala registración en hover: capa roja 2px en X, azul 1px en Y. */
+.panel--misreg {
+  cursor: pointer;
+}
+
+.panel--misreg::before,
+.panel--misreg::after {
+  content: '';
+  position: absolute;
+  inset: calc(var(--rule) * -1);
+  border: var(--rule) solid transparent;
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 90ms steps(2, end);
+}
+
+.panel--misreg:hover::before {
+  border-color: var(--red);
+  transform: translateX(2px);
+  mix-blend-mode: multiply;
+}
+
+.panel--misreg:hover::after {
+  border-color: var(--blue);
+  transform: translateY(1px);
+  mix-blend-mode: multiply;
+}
+
+body.night .panel--misreg:hover::before,
+body.night .panel--misreg:hover::after {
+  mix-blend-mode: screen;
+}
+
+/* Entrada por barrido lateral (clip-path). Sin fade, sin translateY.
+   Se deja 1px visible: Chrome no reporta intersección si el recorte es total. */
+.reveal {
+  clip-path: inset(0 calc(100% - 1px) 0 0);
+}
+
+.reveal.is-in {
+  clip-path: inset(0 -14px -14px 0);
+  transition: clip-path 260ms var(--ease-out);
+  transition-delay: var(--stagger, 0ms);
+}
+
+/* Globo de diálogo con rabo cuadrado. */
+.balloon {
+  position: relative;
+  border: var(--rule) solid var(--ink);
+  background: var(--paper);
+  padding: 18px 20px;
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  left: 28px;
+  bottom: calc(-14px - var(--rule));
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border-right: var(--rule) solid var(--ink);
+  border-bottom: var(--rule) solid var(--ink);
+  transform: skewX(-30deg);
+}
+
+.balloon--broken::after {
+  border-style: dashed;
+}
+
+/* Subrayado que se dibuja de izquierda a derecha. */
+.ink-link {
+  text-decoration: none;
+  background-image: linear-gradient(var(--red), var(--red));
+  background-repeat: no-repeat;
+  background-size: 0% 0.08em;
+  background-position: 0 92%;
+  transition: background-size 260ms var(--ease-out);
+}
+
+.ink-link:hover,
+.ink-link:focus-visible {
+  background-size: 100% 0.08em;
+  outline: none;
+}
+
+/* Botón de imprenta: bloque, sin radio. */
+.btn {
+  display: inline-block;
+  border: var(--rule) solid var(--ink);
+  background: var(--paper);
+  padding: 10px 16px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: translate(0, 0);
+  transition: transform 90ms steps(2, end), box-shadow 90ms steps(2, end);
+}
+
+.btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.btn--ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn--red {
+  background: var(--red);
+  color: #efe9dd;
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+:focus-visible {
+  outline: 3px solid var(--marker);
+  outline-offset: 2px;
+}
+
+/* Esquinas de encuadre para secciones apuntadas con el teléfono. */
+.corner-mark {
+  outline: 3px solid var(--red);
+  outline-offset: 6px;
+}

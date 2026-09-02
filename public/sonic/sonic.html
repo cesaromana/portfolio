@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Open Sonic JS</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="icon" type="image/x-icon" href="/data/images/icon.png">
+  <link href="css/main.css" rel="stylesheet" />
+</head>
+<body>
+  <script>
+    // El motor dibuja su propio joystick si detecta pantalla táctil (comprueba
+    // document.createEvent("TouchEvent")). Aquí sobran: la página pone sus
+    // controles encima, así que se le hace creer que no hay táctil.
+    (function () {
+      var real = document.createEvent.bind(document);
+      document.createEvent = function (name) {
+        if (String(name) === 'TouchEvent') throw new Error('touch disabled');
+        return real(name);
+      };
+    })();
+  </script>
+  <script type="text/javascript" src="js/opensonic.js"></script>
+</body>
+</html>

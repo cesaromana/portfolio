@@ -1,0 +1,362 @@
+/* ===== Sentido arácnido (PC): la única sección que invierte el papel ===== */
+.sense {
+  background: var(--night);
+  color: var(--night-paper);
+  padding: 84px var(--margin);
+  margin: 0;
+}
+
+.sense .balloon,
+.sense .panel {
+  --paper: var(--night);
+  --ink: var(--night-paper);
+  --red: var(--night-red);
+  --blue: var(--night-blue);
+  --ink-soft: #b8afa0;
+  --dots: rgba(239, 233, 221, 0.14);
+}
+
+.sense__grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: var(--gutter);
+  align-items: start;
+}
+
+.sense__head h2 {
+  font-size: var(--d3);
+  text-transform: uppercase;
+  color: var(--night-paper);
+}
+
+.sense__head h2 em {
+  font-style: normal;
+  color: var(--night-red);
+}
+
+.sense__head p {
+  margin-top: 16px;
+  max-width: 48ch;
+  font-size: 19px;
+  color: #b8afa0;
+}
+
+.sense__head p.mono {
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.sense__qr {
+  border: var(--rule) solid var(--night-paper);
+  background: #efe9dd;
+  padding: 20px;
+  width: fit-content;
+  margin-bottom: 28px;
+  box-shadow: 7px 7px 0 var(--night-paper);
+  animation: qr-beat 1.8s steps(2, end) infinite;
+}
+
+@keyframes qr-beat {
+  0%, 100% { box-shadow: 7px 7px 0 var(--night-paper); }
+  50% { box-shadow: 7px 7px 0 var(--night-red); }
+}
+
+.sense__qr svg {
+  display: block;
+}
+
+.sense__qr--off {
+  background: transparent;
+  color: #b8afa0;
+  animation: none;
+  border-style: dashed;
+  box-shadow: none;
+  width: 264px;
+  height: 264px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.sense__state {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: grid;
+  gap: 14px;
+}
+
+.sense__state .row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(239, 233, 221, 0.2);
+}
+
+.sense__state .row .k {
+  color: #b8afa0;
+}
+
+.sense__state .row .v {
+  color: var(--night-paper);
+}
+
+.sense__state .row .v.red {
+  color: var(--night-red);
+}
+
+.sense__state .row .v.blue {
+  color: var(--night-blue);
+}
+
+.blocks {
+  display: flex;
+  gap: 4px;
+}
+
+.blocks i {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--night-paper);
+}
+
+.blocks i.on {
+  background: var(--night-paper);
+}
+
+.sense__url {
+  margin-top: 16px;
+  color: #b8afa0;
+  font-size: 11px;
+  word-break: break-all;
+}
+
+.sense__url code {
+  color: var(--night-paper);
+}
+
+.sense__actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sense .btn {
+  border-color: var(--night-paper);
+  color: var(--night-paper);
+  background: transparent;
+  box-shadow: 4px 4px 0 var(--night-paper);
+}
+
+.sense .btn--red {
+  background: var(--night-red);
+  color: #131110;
+  border-color: var(--night-red);
+}
+
+@media (max-width: 960px) {
+  .sense__grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Puntero: retícula con crosshair ===== */
+.reticle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 2px solid var(--red);
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+body.night .reticle {
+  mix-blend-mode: screen;
+}
+
+.reticle::before,
+.reticle::after {
+  content: '';
+  position: absolute;
+  background: var(--red);
+}
+
+.reticle::before {
+  left: 50%;
+  top: -8px;
+  bottom: -8px;
+  width: 2px;
+  margin-left: -1px;
+}
+
+.reticle::after {
+  top: 50%;
+  left: -8px;
+  right: -8px;
+  height: 2px;
+  margin-top: -1px;
+}
+
+.reticle.is-pressed {
+  transform: scale(0.7);
+}
+
+/* ===== Pantalla del teléfono ===== */
+.phone {
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--night);
+  color: var(--night-paper);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 18px;
+  padding: max(16px, env(safe-area-inset-top)) 20px max(16px, env(safe-area-inset-bottom));
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.phone__top {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b8afa0;
+}
+
+.phone__top b {
+  color: var(--night-paper);
+  font-weight: 500;
+}
+
+.phone__main {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.phone__main h1 {
+  font-size: clamp(40px, 12vw, 64px);
+  text-transform: uppercase;
+  color: var(--night-paper);
+}
+
+.phone__main h1 em {
+  font-style: normal;
+  color: var(--night-red);
+}
+
+.phone__main p {
+  margin-top: 14px;
+  color: #b8afa0;
+  font-size: 18px;
+  max-width: 30ch;
+}
+
+.phone__ring {
+  width: 172px;
+  height: 172px;
+  border: 3px solid rgba(239, 233, 221, 0.25);
+  position: relative;
+  margin: 0 auto 24px;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.phone__ring::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+  height: calc(var(--fill, 0) * 100%);
+  background: var(--night-red);
+  transition: height 120ms linear;
+}
+
+.phone__ring span {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 44px;
+  letter-spacing: -0.02em;
+  color: #efe9dd;
+}
+
+.phone__pad {
+  width: 100%;
+  height: 100%;
+  min-height: 40vh;
+  border: var(--rule) solid var(--night-paper);
+  background: transparent;
+  color: var(--night-paper);
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: grid;
+  place-items: center;
+  box-shadow: 7px 7px 0 var(--night-paper);
+}
+
+.phone__pad:active,
+.phone__pad.is-pressed {
+  background: var(--night-red);
+  color: #131110;
+  box-shadow: 0 0 0 var(--night-paper);
+  transform: translate(7px, 7px);
+}
+
+.phone__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.phone .btn {
+  border-color: var(--night-paper);
+  color: var(--night-paper);
+  background: transparent;
+  box-shadow: 4px 4px 0 var(--night-paper);
+}
+
+.phone .btn--red {
+  background: var(--night-red);
+  color: #131110;
+  border-color: var(--night-red);
+}
+
+.phone__landscape {
+  position: fixed;
+  inset: 0;
+  background: var(--night);
+  color: var(--night-paper);
+  display: none;
+  place-items: center;
+  text-align: center;
+  padding: 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .phone__landscape {
+    display: grid;
+  }
+}

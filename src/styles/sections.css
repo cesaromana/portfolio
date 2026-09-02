@@ -1,0 +1,455 @@
+/* ===== Barra superior ===== */
+.topbar {
+  position: absolute;
+  top: 0;
+  left: var(--margin);
+  right: var(--margin);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+.topbar nav {
+  display: flex;
+  gap: 24px;
+}
+
+.topbar a {
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.topbar a:hover {
+  color: var(--red);
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.night-toggle {
+  border: var(--rule) solid var(--ink);
+  background: transparent;
+  width: 34px;
+  height: 22px;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.night-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: var(--ink);
+  transition: transform 90ms steps(2, end);
+}
+
+body.night .night-toggle::after {
+  transform: translateX(14px);
+}
+
+@media (max-width: 720px) {
+  .topbar nav {
+    display: none;
+  }
+}
+
+/* ===== Hero: la splash ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: 84px;
+  padding-bottom: 52px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr auto auto;
+  gap: var(--gutter);
+  overflow: hidden;
+}
+
+.hero__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__name {
+  grid-column: 1 / 13;
+  grid-row: 2;
+  align-self: end;
+  position: relative;
+  z-index: 1;
+  font-size: var(--d4);
+  text-transform: uppercase;
+}
+
+.hero__name .glyphs {
+  display: block;
+}
+
+.hero__name .glyphs:nth-child(2) {
+  padding-left: 0.9em;
+  color: var(--red);
+}
+
+.hero__balloon {
+  grid-column: 9 / 13;
+  grid-row: 1;
+  align-self: start;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__balloon p {
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.hero__balloon p + p {
+  margin-top: 10px;
+}
+
+.hero__balloon .wait {
+  color: var(--red);
+  font-style: italic;
+}
+
+.hero__foot {
+  grid-column: 1 / 13;
+  grid-row: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--gutter);
+  margin-top: 32px;
+  position: relative;
+  z-index: 1;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 960px) {
+  .hero__balloon {
+    grid-column: 1 / 13;
+    max-width: 420px;
+    margin-top: 24px;
+  }
+}
+
+/* ===== Sección genérica ===== */
+.section {
+  padding-block: 84px;
+}
+
+.section__head {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.section__head h2 {
+  font-size: var(--d2);
+  text-transform: uppercase;
+}
+
+.section__head .mono {
+  color: var(--ink-soft);
+}
+
+/* ===== Proyectos: la tira ===== */
+.strip {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 240px;
+  gap: var(--gutter);
+}
+
+.strip .panel {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  text-align: left;
+  border-width: var(--rule);
+  transition: border-width 90ms steps(2, end);
+}
+
+.strip .panel:hover {
+  border-width: 4px;
+}
+
+/* Pie de viñeta: bloque de papel sólido, el arte pasa por detrás. */
+.panel__cap {
+  position: relative;
+  z-index: 1;
+  margin: 0 -20px -20px;
+  padding: 16px 20px 20px;
+  background: var(--paper);
+  border-top: var(--rule) solid var(--ink);
+}
+
+.strip .panel h3 {
+  font-size: var(--d1);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.strip .panel p {
+  max-width: 44ch;
+}
+
+.strip .panel .stack {
+  display: block;
+  margin-top: 10px;
+  color: var(--ink-soft);
+}
+
+.panel__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  transition: transform 400ms var(--ease-out);
+}
+
+.strip .panel:hover .panel__shapes {
+  transform: translateX(-14px);
+}
+
+.panel__shapes {
+  transition: transform 400ms var(--ease-out);
+}
+
+.strip .panel h3 {
+  margin-top: auto;
+}
+
+.p-recuerdos { grid-column: 1 / 8; grid-row: span 2; }
+.p-gatos { grid-column: 8 / 13; }
+.p-n8n { grid-column: 8 / 13; }
+
+@media (max-width: 960px) {
+  .strip { grid-auto-rows: 210px; }
+  .p-recuerdos, .p-gatos, .p-n8n { grid-column: 1 / 13; grid-row: span 1; }
+  .p-recuerdos { grid-row: span 2; }
+}
+
+/* ===== Expansión de proyecto ===== */
+.expand {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: var(--margin);
+}
+
+.expand__veil {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--dots) 1.4px, transparent 1.5px);
+  background-size: 7px 7px;
+  background-color: rgba(22, 19, 15, 0.22);
+}
+
+.expand .panel {
+  position: relative;
+  width: min(980px, 100%);
+  max-height: calc(100vh - var(--margin) * 2);
+  overflow: auto;
+  padding: 36px;
+  animation: flip-in 380ms var(--ease-flip);
+}
+
+@keyframes flip-in {
+  from { transform: scale(0.72); }
+  to { transform: scale(1); }
+}
+
+.expand__body {
+  animation: body-in 260ms var(--ease-out) 120ms both;
+}
+
+@keyframes body-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.expand h3 {
+  font-size: var(--d3);
+  text-transform: uppercase;
+  margin: 12px 0 16px;
+}
+
+.expand__cols {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 32px;
+}
+
+.expand__cols p {
+  margin-bottom: 14px;
+  font-size: 19px;
+}
+
+.expand dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+}
+
+.expand dt {
+  color: var(--ink-soft);
+}
+
+.expand dd {
+  margin: 0;
+}
+
+.expand__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.expand__actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .expand__cols { grid-template-columns: 1fr; }
+  .expand .panel { padding: 24px; }
+}
+
+/* ===== Colofón ===== */
+.colophon {
+  padding-block: 64px 44px;
+  border-top: var(--rule) solid var(--ink);
+}
+
+.colophon__links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.colophon__links a {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: var(--d2);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  width: fit-content;
+}
+
+.colophon__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 32px;
+  color: var(--ink-soft);
+}
+
+/* ===== Qué tiene cada proyecto ===== */
+.expand__sub {
+  margin: 26px 0 12px;
+  color: var(--ink-soft);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.expand__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.expand__features li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 17px;
+}
+
+.expand__features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 12px;
+  height: 3px;
+  background: var(--red);
+}
+
+
+/* ===== Colofón: enlaces a la izquierda, contacto a la derecha ===== */
+.colophon__grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px var(--gutter);
+  align-items: end;
+  margin-bottom: 40px;
+}
+
+.reach {
+  margin: 0;
+  display: grid;
+  gap: 4px 20px;
+  justify-items: start;
+}
+
+.reach dt {
+  color: var(--ink-soft);
+}
+
+.reach dt + dd {
+  margin: 0 0 22px;
+}
+
+.reach dd:last-of-type {
+  margin-bottom: 0;
+}
+
+.reach a {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(20px, 2.2vw, 30px);
+  letter-spacing: -0.02em;
+  word-break: break-word;
+}
+
+@media (min-width: 961px) {
+  .reach {
+    justify-items: end;
+    text-align: right;
+  }
+}
+
+@media (max-width: 960px) {
+  .colophon__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 44px;
+  }
+}
