@@ -1,0 +1,72 @@
+/* ===== La barra de desplazamiento, en el lenguaje de la página =====
+   Se estiliza la barra nativa; el desplazamiento sigue siendo el del navegador.
+   Sustituirlo por uno propio es lo que rompe la inercia del dedo en el teléfono. */
+
+html {
+  scrollbar-color: var(--ink) var(--paper-2);
+  scrollbar-width: thin;
+}
+
+/* WebKit y Blink admiten el detalle completo: raíl con trama y tirador de tinta. */
+::-webkit-scrollbar {
+  width: 13px;
+  height: 13px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--paper-2);
+  background-image: radial-gradient(var(--dots) 1px, transparent 1.1px);
+  background-size: 6px 6px;
+  border-left: 2px solid var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border: 3px solid var(--paper-2);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--red);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--blue);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--paper-2);
+}
+
+/* Dentro de una hoja o de un panel la barra va más discreta. */
+.expand .panel::-webkit-scrollbar {
+  width: 9px;
+}
+
+/* ===== Regla de avance ===== */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 100;
+  background: var(--dots);
+  pointer-events: none;
+}
+
+.progress::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--red);
+  transform: scaleX(var(--scroll, 0));
+  transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress::after {
+    transition: none;
+  }
+}

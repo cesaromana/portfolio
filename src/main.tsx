@@ -11,6 +11,7 @@ import './styles/interactive.css';
 import './styles/games.css';
 import './styles/stack.css';
 import './styles/mobile.css';
+import './styles/scroll.css';
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => undefined));

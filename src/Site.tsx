@@ -3,6 +3,7 @@ import { useAmbient } from './hooks/useAmbient';
 import { useIsDesktop } from './hooks/useIsDesktop';
 import { useNight } from './hooks/useNight';
 import Ink from './motion/Ink';
+import Progress from './motion/Progress';
 import About from './sections/About';
 import Colophon from './sections/Colophon';
 import Experience from './sections/Experience';
@@ -18,6 +19,7 @@ export default function Site() {
   const isDesktop = useIsDesktop();
   return (
     <>
+      <Progress />
       <Topbar isNight={night} onToggleNight={toggle} isSound={isOn} onToggleSound={toggleSound} />
       <main>
         <Hero />
