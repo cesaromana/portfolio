@@ -9,6 +9,15 @@ const STOP = 0.4;
 const VELOCITY_MIX = 0.35;
 
 /**
+ * La página usa `scroll-behavior: smooth`, así que cada scrollBy normal se
+ * convierte en una animación; llamándolo a 60 por segundo, cada una cancela la
+ * anterior y la página apenas avanza. De ahí el `behavior: 'instant'`.
+ */
+function jump(dy: number) {
+  window.scrollBy({ top: dy, behavior: 'instant' });
+}
+
+/**
  * Mueve la página desde el mando. Los mensajes llegan al ritmo de la red, así
  * que se acumulan y se aplican una vez por fotograma: eso es lo que hace que
  * se sienta continuo en vez de a tirones. Al soltar el dedo queda inercia.
@@ -23,7 +32,7 @@ export class ScrollDriver {
     const dy = fraction * window.innerHeight * SCREENS_PER_DRAG;
     this.isCoasting = false;
     this.velocity += (dy - this.velocity) * VELOCITY_MIX;
-    window.scrollBy(0, dy);
+    jump(dy);
   }
 
   /** El dedo se levantó: sigue rodando con lo que llevaba. */
@@ -54,7 +63,7 @@ export class ScrollDriver {
       this.velocity = 0;
       return;
     }
-    window.scrollBy(0, this.velocity);
+    jump(this.velocity);
     this.velocity *= FRICTION;
     this.start();
   }
