@@ -41,7 +41,7 @@
   cursor: pointer;
 }
 
-.night-toggle::after {
+.night-toggle::before {
   content: '';
   position: absolute;
   top: 2px;
@@ -52,7 +52,7 @@
   transition: transform 90ms steps(2, end);
 }
 
-body.night .night-toggle::after {
+body.night .night-toggle::before {
   transform: translateX(14px);
 }
 

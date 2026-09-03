@@ -3,13 +3,13 @@
    que es el que respeta la inercia del dedo y el rebote del teléfono. */
 
 html {
-  scrollbar-color: #16130f #e3daca;
+  scrollbar-color: #1d1a15 #e3daca;
   scrollbar-width: thin;
 }
 
 /* Las variables de tema viven en body; html necesita su propio juego. */
 html.night-boot {
-  scrollbar-color: #efe9dd #1c1917;
+  scrollbar-color: #e7e0d3 #211d1a;
 }
 
 /* WebKit y Blink admiten el detalle completo: raíl con trama y tirador de tinta. */

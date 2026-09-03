@@ -33,8 +33,8 @@ export const tools: Tool[] = [
   { id: 'sql', name: 'SQL', group: 'data', size: 96, text: true },
   { id: 'postgres', name: 'PostgreSQL', group: 'data', size: 106 },
   { id: 'mysql', name: 'MySQL', group: 'data', size: 100 },
-  { id: 'sqlite', name: 'SQLite', group: 'data', size: 88 },
   { id: 'redis', name: 'Redis', group: 'data', size: 88 },
+  { id: 'dragonfly', name: 'Dragonfly', group: 'data', size: 92, text: true },
 
   { id: 'docker', name: 'Docker', group: 'tool', size: 101 },
   { id: 'gcp', name: 'Google Cloud', group: 'tool', size: 96 },

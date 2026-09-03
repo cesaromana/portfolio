@@ -2,16 +2,16 @@
 .arcade {
   margin-top: 64px;
   --paper: var(--night);
-  --paper-2: #1c1917;
+  --paper-2: #211d1a;
   --ink: var(--night-paper);
-  --ink-soft: #b8afa0;
+  --ink-soft: #a9a294;
   --red: var(--night-red);
   --blue: var(--night-blue);
   --dots: rgba(239, 233, 221, 0.14);
 }
 
 .arcade__menu > .mono {
-  color: #b8afa0;
+  color: #a9a294;
   margin-bottom: 18px;
 }
 
@@ -162,12 +162,12 @@
 /* ===== Partida a pantalla completa en teléfono ===== */
 .arcade__stage--full {
   --paper: var(--night);
-  --paper-2: #1c1917;
+  --paper-2: #211d1a;
   --ink: var(--night-paper);
-  --ink-soft: #b8afa0;
+  --ink-soft: #a9a294;
   --red: var(--night-red);
   --blue: var(--night-blue);
-  --marker: #f5d547;
+  --marker: #e6c65f;
   --dots: rgba(239, 233, 221, 0.14);
   position: fixed;
   inset: 0;
@@ -209,7 +209,7 @@
 }
 
 .thumbs__note {
-  color: #b8afa0;
+  color: #a9a294;
 }
 
 .thumbs__row {
@@ -241,12 +241,12 @@
 
 .thumbs__btn--a:active {
   background: var(--night-red);
-  color: #131110;
+  color: #181513;
 }
 
 .thumbs__btn--b:active {
   background: var(--night-blue);
-  color: #131110;
+  color: #181513;
 }
 
 @media (max-width: 960px) {
@@ -275,7 +275,7 @@
   place-content: center;
   gap: 14px;
   justify-items: center;
-  color: #b8afa0;
+  color: #a9a294;
   touch-action: none;
 }
 
@@ -320,8 +320,8 @@
   box-shadow: 0 0 0 var(--night-paper);
 }
 
-.phone__btn--a:active { background: var(--night-red); color: #131110; }
-.phone__btn--b:active { background: var(--night-blue); color: #131110; }
+.phone__btn--a:active { background: var(--night-red); color: #181513; }
+.phone__btn--b:active { background: var(--night-blue); color: #181513; }
 
 /* ===== Consola portátil para Sonic ===== */
 .gameboy {
@@ -398,7 +398,7 @@
 
 .dpad__btn:active {
   background: var(--night-paper);
-  color: #131110;
+  color: #181513;
 }
 
 .dpad__up { grid-column: 2; grid-row: 1; }
@@ -419,7 +419,7 @@
   border-radius: 50%;
   border: var(--rule) solid var(--night-red);
   background: var(--night-red);
-  color: #131110;
+  color: #181513;
   font-family: var(--display);
   font-weight: 800;
   font-size: 32px;
@@ -461,7 +461,7 @@
 
 .gameboy .btn--red {
   background: var(--night-red);
-  color: #131110;
+  color: #181513;
   border-color: var(--night-red);
 }
 

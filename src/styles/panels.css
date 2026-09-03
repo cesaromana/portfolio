@@ -151,7 +151,7 @@ body.night .panel--misreg:hover::after {
 
 .btn--red {
   background: var(--red);
-  color: #efe9dd;
+  color: #e7e0d3;
 }
 
 .btn[disabled] {

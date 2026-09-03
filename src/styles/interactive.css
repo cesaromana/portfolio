@@ -106,7 +106,7 @@ body.night .cursor {
 /* ===== Hover extra en viñetas ===== */
 .strip .panel:hover .panel__num {
   background: var(--marker);
-  color: #16130f;
+  color: #1d1a15;
   padding: 1px 5px;
   margin: -1px -5px;
 }
@@ -235,7 +235,7 @@ body.night .cursor {
 .job__kind {
   align-self: start;
   background: var(--marker);
-  color: #16130f;
+  color: #1d1a15;
   padding: 2px 7px;
   margin-bottom: 4px;
 }

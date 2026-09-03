@@ -74,7 +74,7 @@
 
   .strip .panel.is-focus .panel__num {
     background: var(--marker);
-    color: #16130f;
+    color: #1d1a15;
     padding: 1px 5px;
     margin: -1px -5px;
   }
