@@ -21,7 +21,6 @@ export const tools: Tool[] = [
   { id: 'java', name: 'Java', group: 'lang', size: 98 },
   { id: 'cs', name: 'C#', group: 'lang', size: 93 },
   { id: 'js', name: 'JavaScript', group: 'lang', size: 98 },
-  { id: 'bash', name: 'Bash', group: 'lang', size: 78 },
 
   { id: 'react', name: 'React', group: 'frame', size: 114 },
   { id: 'nodejs', name: 'Node.js', group: 'frame', size: 109 },
@@ -39,6 +38,7 @@ export const tools: Tool[] = [
   { id: 'docker', name: 'Docker', group: 'tool', size: 101 },
   { id: 'gcp', name: 'Google Cloud', group: 'tool', size: 96 },
   { id: 'linux', name: 'Linux', group: 'tool', size: 88 },
+  { id: 'bash', name: 'Bash', group: 'tool', size: 82 },
   { id: 'git', name: 'Git', group: 'tool', size: 83 },
   { id: 'github', name: 'GitHub', group: 'tool', size: 83 },
   { id: 'postman', name: 'Postman', group: 'tool', size: 78 },
