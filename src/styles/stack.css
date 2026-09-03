@@ -34,12 +34,6 @@
   height: 70%;
   object-fit: contain;
   pointer-events: none;
-  filter: grayscale(1) contrast(1.1);
-  transition: filter 90ms steps(2, end);
-}
-
-.sticker:hover img {
-  filter: none;
 }
 
 .sticker__word {

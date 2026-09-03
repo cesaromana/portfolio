@@ -1,9 +1,16 @@
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 const LERP = 0.42;
 const TARGETS = 'a, button, [data-target]';
 
-/** Cursor propio: un cuadrado de tinta roja que sigue al mouse con retardo y crece sobre los enlaces. */
+/**
+ * Cursor propio: un cuadrado que sigue al mouse con retardo y crece sobre los
+ * enlaces. Se invierte contra lo que tenga debajo, así que se cuelga del body
+ * y no de #root: dentro de #root la mezcla sólo ve lo que se pinta ahí, y el
+ * fondo de la página se pinta por fuera. Ahí el cuadrado quedaba blanco sobre
+ * el papel, que es justo cuando hace falta que se vea.
+ */
 export default function Cursor() {
   const el = useRef<HTMLDivElement>(null);
 
@@ -42,5 +49,5 @@ export default function Cursor() {
     };
   }, []);
 
-  return <div ref={el} className="cursor" aria-hidden="true" />;
+  return createPortal(<div ref={el} className="cursor" aria-hidden="true" />, document.body);
 }

@@ -12,15 +12,14 @@ body.has-cursor button {
   width: 14px;
   height: 14px;
   margin: -7px 0 0 -7px;
-  background: var(--red);
   z-index: 10000;
   pointer-events: none;
-  mix-blend-mode: multiply;
+  /* Se invierte contra lo que tenga debajo en vez de pintarse encima: así no
+     se pierde al pasar de una viñeta oscura al papel, que era lo que pasaba
+     multiplicando. El color sale del contraste, no de una tinta fija. */
+  background: #fff;
+  mix-blend-mode: difference;
   transition: width 90ms steps(2, end), height 90ms steps(2, end), margin 90ms steps(2, end), background 90ms steps(2, end);
-}
-
-body.night .cursor {
-  mix-blend-mode: screen;
 }
 
 .cursor.is-over {
@@ -28,13 +27,14 @@ body.night .cursor {
   height: 34px;
   margin: -17px 0 0 -17px;
   background: transparent;
-  outline: 2.5px solid var(--red);
+  outline: 2.5px solid #fff;
   outline-offset: -2.5px;
 }
 
+/* Al pulsar sí se planta un color: es un instante y se quiere que se note. */
 .cursor.is-down {
-  background: var(--blue);
-  outline-color: var(--blue);
+  background: #6d87e8;
+  outline-color: #6d87e8;
 }
 
 /* ===== Nombre del hero, glifo a glifo ===== */
