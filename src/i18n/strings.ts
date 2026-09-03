@@ -24,7 +24,7 @@ export const S = {
   },
   projects: {
     title: bi('La tira', 'The strip'),
-    sub: bi('Tres viñetas · clic para abrir', 'Three panels · click to open'),
+    sub: bi('Cuatro viñetas · clic para abrir', 'Four panels · click to open'),
     panel: bi('Viñeta', 'Panel'),
     year: bi('Año', 'Year'),
     role: bi('Rol', 'Role'),

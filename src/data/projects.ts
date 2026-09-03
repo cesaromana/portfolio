@@ -109,4 +109,36 @@ export const projects: Project[] = [
     ],
     hue: 'red',
   },
+  {
+    id: 'mando',
+    num: '04',
+    title: 'Mando',
+    line: bi(
+      'El teléfono como mando de una página web: se escanea un QR y el giroscopio maneja la pantalla grande.',
+      'The phone as a controller for a web page: scan a QR and the gyroscope drives the big screen.',
+    ),
+    stack: ['TypeScript', 'WebRTC', 'PeerJS', 'DeviceOrientation', 'Vite', 'Express'],
+    year: '2026',
+    role: bi('Protocolo, calibración y demo', 'Protocol, calibration and demo'),
+    repo: 'https://github.com/cesaromana/mando',
+    story: [
+      bi(
+        'Es la pieza que mueve el mando de esta misma página, sacada aparte para que sirva en cualquier sitio. No hay aplicación que instalar: el mando es otra página web, y después del saludo los datos van directo de un aparato al otro.',
+        'It is the piece driving the controller on this very page, pulled out so it works anywhere. There is nothing to install: the controller is another web page, and after the handshake the data goes straight from one device to the other.',
+      ),
+      bi(
+        'Lo difícil no fue conectar, fue que se sintiera bien: encontrar el centro sin hacer esperar y que la cruceta no tiemble con cada lectura del sensor.',
+        'The hard part was not connecting, it was making it feel right: finding the centre without a wait, and keeping the crosshair from shaking with every sensor reading.',
+      ),
+    ],
+    features: [
+      bi('Enlace por QR y WebRTC: la señalización sólo los presenta.', 'QR pairing over WebRTC: signalling only introduces them.'),
+      bi('Calibración que mide el temblor de la mano en vez de contar segundos.', 'Calibration that measures hand shake instead of counting seconds.'),
+      bi('Puntero suavizado a cadencia de pantalla, no a la del sensor.', 'Pointer smoothed at screen rate, not at sensor rate.'),
+      bi('Botones A y B con vibración confirmada desde la pantalla.', 'A and B buttons, with the haptic confirmed by the screen.'),
+      bi('Arrastre en fracciones: el mismo gesto recorre lo mismo en cualquier teléfono.', 'Drag in fractions: the same gesture travels the same on any phone.'),
+      bi('Servidor propio con señalización y TLS local, porque sin HTTPS no hay giroscopio.', 'Own server with signalling and local TLS, because without HTTPS there is no gyroscope.'),
+    ],
+    hue: 'blue',
+  },
 ];
