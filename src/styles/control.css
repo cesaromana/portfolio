@@ -12,7 +12,8 @@
   --ink: var(--night-paper);
   --red: var(--night-red);
   --blue: var(--night-blue);
-  --ink-soft: #b8afa0;
+  --ink-soft: #a9a294;
+  --marker: var(--night-marker);
   --dots: rgba(239, 233, 221, 0.14);
 }
 
@@ -38,7 +39,7 @@
   margin-top: 16px;
   max-width: 48ch;
   font-size: 19px;
-  color: #b8afa0;
+  color: #a9a294;
 }
 
 .sense__head p.mono {
@@ -48,7 +49,7 @@
 
 .sense__qr {
   border: var(--rule) solid var(--night-paper);
-  background: #efe9dd;
+  background: #e7e0d3;
   padding: 20px;
   width: fit-content;
   margin-bottom: 28px;
@@ -67,7 +68,7 @@
 
 .sense__qr--off {
   background: transparent;
-  color: #b8afa0;
+  color: #a9a294;
   animation: none;
   border-style: dashed;
   box-shadow: none;
@@ -96,7 +97,7 @@
 }
 
 .sense__state .row .k {
-  color: #b8afa0;
+  color: #a9a294;
 }
 
 .sense__state .row .v {
@@ -128,7 +129,7 @@
 
 .sense__url {
   margin-top: 16px;
-  color: #b8afa0;
+  color: #a9a294;
   font-size: 11px;
   word-break: break-all;
 }
@@ -153,7 +154,7 @@
 
 .sense .btn--red {
   background: var(--night-red);
-  color: #131110;
+  color: #181513;
   border-color: var(--night-red);
 }
 
@@ -228,7 +229,7 @@ body.night .reticle {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #b8afa0;
+  color: #a9a294;
 }
 
 .phone__top b {
@@ -255,7 +256,7 @@ body.night .reticle {
 
 .phone__main p {
   margin-top: 14px;
-  color: #b8afa0;
+  color: #a9a294;
   font-size: 18px;
   max-width: 30ch;
 }
@@ -314,7 +315,7 @@ body.night .reticle {
 .phone__pad:active,
 .phone__pad.is-pressed {
   background: var(--night-red);
-  color: #131110;
+  color: #181513;
   box-shadow: 0 0 0 var(--night-paper);
   transform: translate(7px, 7px);
 }
@@ -335,7 +336,7 @@ body.night .reticle {
 
 .phone .btn--red {
   background: var(--night-red);
-  color: #131110;
+  color: #181513;
   border-color: var(--night-red);
 }
 

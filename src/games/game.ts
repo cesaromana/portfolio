@@ -19,11 +19,11 @@ export function readPalette(el: Element = document.body): Palette {
   const v = (name: string, fallback: string) => cs.getPropertyValue(name).trim() || fallback;
   return {
     paper: v('--paper', '#efe9dd'),
-    ink: v('--ink', '#16130f'),
-    red: v('--red', '#e3462f'),
-    blue: v('--blue', '#1b45c4'),
-    marker: v('--marker', '#f5d547'),
-    soft: v('--ink-soft', '#4a443b'),
+    ink: v('--ink', '#1d1a15'),
+    red: v('--red', '#b8412e'),
+    blue: v('--blue', '#2f4fa6'),
+    marker: v('--marker', '#f0cf5c'),
+    soft: v('--ink-soft', '#5a5347'),
   };
 }
 

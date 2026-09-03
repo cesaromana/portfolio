@@ -10,7 +10,7 @@ const DOT_MAX = 3.2;
 export function paintHero(ctx: CanvasRenderingContext2D, w: number, h: number, focus: number, maxDpr = 2) {
   const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
   ctx.clearRect(0, 0, w, h);
-  const ink = getComputedStyle(document.body).getPropertyValue('--ink').trim() || '#16130f';
+  const ink = getComputedStyle(document.body).getPropertyValue('--ink').trim() || '#1d1a15';
   const originX = focus * w;
   const originY = h * 0.62;
 

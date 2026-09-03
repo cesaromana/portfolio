@@ -10,7 +10,7 @@ html {
 }
 
 html.night-boot body {
-  background: #131110;
+  background: #181513;
 }
 
 body {
@@ -26,12 +26,13 @@ body {
 
 body.night {
   --paper: var(--night);
-  --paper-2: #1c1917;
+  --paper-2: #211d1a;
   --ink: var(--night-paper);
-  --ink-soft: #b8afa0;
+  --ink-soft: #a9a294;
   --red: var(--night-red);
   --blue: var(--night-blue);
-  --dots: rgba(239, 233, 221, 0.14);
+  --marker: var(--night-marker);
+  --dots: rgba(231, 224, 211, 0.14);
 }
 
 body::before {
@@ -74,7 +75,7 @@ button {
 
 ::selection {
   background: var(--marker);
-  color: #16130f;
+  color: #1d1a15;
 }
 
 .mono {

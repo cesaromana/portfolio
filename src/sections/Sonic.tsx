@@ -33,7 +33,7 @@ export default function Sonic() {
             <button className="btn" data-target onClick={() => setPlaying(true)}>
               {t(S.about.sonicPlay)}
             </button>
-            <p className="mono mono--sm" style={{ marginTop: 14, color: '#b8afa0' }}>
+            <p className="mono mono--sm" style={{ marginTop: 14, color: '#a9a294' }}>
               {isDesktop ? t(S.about.sonicKeys) : '↑ ↓ ← → · A'}
             </p>
           </div>

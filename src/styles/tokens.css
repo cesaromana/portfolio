@@ -1,17 +1,21 @@
 :root {
+  /* Tintas de risografía: pigmento sobre papel, no luz. Las versiones
+     saturadas vibraban contra el fondo y cansaban la vista a los dos minutos,
+     así que cada tinta baja un punto de saturación y el negro no es negro. */
   --paper: #efe9dd;
   --paper-2: #e3daca;
-  --ink: #16130f;
-  --ink-soft: #4a443b;
-  --red: #e3462f;
-  --blue: #1b45c4;
-  --marker: #f5d547;
-  --dots: rgba(22, 19, 15, 0.14);
+  --ink: #1d1a15;
+  --ink-soft: #5a5347;
+  --red: #b8412e;
+  --blue: #2f4fa6;
+  --marker: #f0cf5c;
+  --dots: rgba(29, 26, 21, 0.14);
 
-  --night: #131110;
-  --night-paper: #efe9dd;
-  --night-red: #ff5a42;
-  --night-blue: #5c7bff;
+  --night: #181513;
+  --night-paper: #e7e0d3;
+  --night-red: #e9634c;
+  --night-blue: #7189d4;
+  --night-marker: #e6c65f;
 
   --display: 'Bricolage Grotesque', Archivo, 'Helvetica Neue', Helvetica, sans-serif;
   --body: 'Newsreader', Georgia, 'Times New Roman', serif;

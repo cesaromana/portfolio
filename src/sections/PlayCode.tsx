@@ -27,7 +27,7 @@ export default function PlayCode({ isArmed, state }: Props) {
     <div className="sense__side">
       {isWaiting && url && (
         <div className="sense__qr">
-          <QRCodeSVG value={url} size={220} bgColor="#efe9dd" fgColor="#131110" level="M" />
+          <QRCodeSVG value={url} size={220} bgColor="#efe9dd" fgColor="#181513" level="M" />
         </div>
       )}
       {isWaiting && !url && !state.error && <p className="mono">{t(S.play.generating)}</p>}
