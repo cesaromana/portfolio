@@ -143,7 +143,7 @@ html.is-flipping::view-transition-old(root) {
 
 html.is-flipping::view-transition-new(root) {
   z-index: 1;
-  animation: ink-flood 620ms var(--ease-flip);
+  animation: ink-flood 560ms cubic-bezier(0.45, 0, 0.25, 1);
 }
 
 @keyframes ink-flood {
@@ -153,4 +153,15 @@ html.is-flipping::view-transition-new(root) {
   to {
     clip-path: circle(var(--flip-r) at var(--flip-x) var(--flip-y));
   }
+}
+
+/* La mancha del teléfono: sólo se le anima transformación y opacidad, que van
+   por composición; animar el color de fondo de la página sería repintar todo. */
+.ink-blot {
+  position: fixed;
+  z-index: 9998;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: scale(0);
+  will-change: transform, opacity;
 }
