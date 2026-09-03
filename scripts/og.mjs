@@ -21,28 +21,28 @@ const red = token('night-red');
 const soft = '#a9a294';
 
 const html = `<!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Martian+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Martian+Mono:wght@500&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; box-sizing: border-box; }
-  body { width: 1200px; height: 630px; background: ${night}; color: ${cream}; overflow: hidden; }
-  .dots { position: absolute; inset: 0; background-image: radial-gradient(${cream}22 1.4px, transparent 1.4px); background-size: 16px 16px; }
-  .card { position: relative; height: 100%; padding: 64px 72px; display: flex; flex-direction: column; justify-content: space-between; }
-  .top { display: flex; justify-content: space-between; align-items: center; font: 500 22px 'Martian Mono', monospace; letter-spacing: 0.18em; text-transform: uppercase; color: ${soft}; }
-  h1 { font: 800 168px/0.86 'Bricolage Grotesque', sans-serif; letter-spacing: -0.03em; text-transform: uppercase; }
+  body { width: 1200px; height: 630px; background: ${night}; color: ${cream}; overflow: hidden; font-family: 'Martian Mono', monospace; }
+  .dots { position: absolute; inset: 0; background-image: radial-gradient(${cream}20 1.4px, transparent 1.4px); background-size: 16px 16px; }
+  .card { position: relative; height: 100%; padding: 58px 72px; display: flex; flex-direction: column; justify-content: space-between; }
+  .line { display: flex; justify-content: space-between; white-space: nowrap; font-size: 21px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: ${soft}; }
+  .foot { font-size: 18px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: ${soft}; white-space: nowrap; }
+  h1 { font: 800 152px/0.9 'Bricolage Grotesque', sans-serif; letter-spacing: -0.03em; text-transform: uppercase; }
   h1 span { color: ${red}; }
-  .rule { height: 5px; background: ${red}; width: 300px; margin: 26px 0 22px; }
-  p { font: 500 26px 'Martian Mono', monospace; letter-spacing: 0.06em; color: ${soft}; }
-  .foot { display: flex; justify-content: space-between; font: 500 22px 'Martian Mono', monospace; letter-spacing: 0.14em; text-transform: uppercase; }
+  .rule { height: 5px; background: ${red}; width: 260px; margin: 30px 0 24px; }
+  p { font: 400 32px/1.35 'Newsreader', Georgia, serif; color: ${cream}; max-width: 720px; }
 </style></head><body>
   <div class="dots"></div>
   <div class="card">
-    <div class="top"><span>cesaromana.lat</span><span>Valencia, Venezuela</span></div>
+    <div class="line"><span>cesaromana.lat</span><span>Valencia, Venezuela</span></div>
     <div>
       <h1>César<br><span>Omaña</span></h1>
       <div class="rule"></div>
-      <p>Ingeniero en computación · backend, frontend y lo que haga falta en medio</p>
+      <p>Computer engineer. Backend first, full stack always, games on the side.</p>
     </div>
-    <div class="foot"><span>Proyectos · Trayectoria · Juegos</span><span>El teléfono es el mando</span></div>
+    <div class="foot">What I have built · Track record · Games · Your phone is the controller</div>
   </div>
 </body></html>`;
 

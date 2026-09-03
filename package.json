@@ -9,7 +9,8 @@
     "serve": "node server/index.js",
     "start": "npm run build && node server/index.js",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "og": "node scripts/og.mjs"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
@@ -26,6 +27,7 @@
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.1.0",
     "oxlint": "^1.79.0",
+    "puppeteer-core": "^25.10.0",
     "typescript": "~6.0.2",
     "vite": "^8.2.2"
   },
