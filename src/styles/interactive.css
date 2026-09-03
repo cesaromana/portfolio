@@ -1,7 +1,12 @@
 /* ===== Cursor propio ===== */
+
+/* Cuando el cuadrado está en pantalla nadie más dibuja puntero. Enlaces,
+   botones y el muro de calcomanías traen el suyo (mano, agarre, cruz) y se
+   colaban encima del propio, que es lo que hacía aparecer la manito. */
 body.has-cursor,
-body.has-cursor a,
-body.has-cursor button {
+body.has-cursor *,
+body.has-cursor *:disabled,
+body.has-cursor *[disabled] {
   cursor: none;
 }
 
