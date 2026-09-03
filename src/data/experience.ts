@@ -58,8 +58,8 @@ export const jobs: Job[] = [
     ),
     details: [
       bi(
-        'Creación de distintos módulos a medida, con Node en los servicios que los acompañaban.',
-        'Built several custom modules, with Node behind the services around them.',
+        'Creación de distintos módulos a medida en Odoo.',
+        'Built several custom modules in Odoo.',
       ),
       bi(
         'Módulo de suscripciones: procesos del negocio, optimizaciones y su conexión con el controlador de red.',
@@ -70,13 +70,13 @@ export const jobs: Job[] = [
         'Maintenance and development of the network controller.',
       ),
       bi(
-        'Implementación de una API de mensajería para administrar el envío de mensajes.',
-        'Implemented a messaging API to manage message delivery.',
+        'Implementación de una API de mensajería hecha en Go, para administrar el envío de mensajes.',
+        'Implemented a messaging API written in Go to manage message delivery.',
       ),
       bi('Desarrollo de una aplicación de mensajería.', 'Built a messaging application.'),
       bi('Migraciones de datos entre versiones y entre sistemas.', 'Data migrations between versions and between systems.'),
     ],
-    stack: ['Odoo', 'Python', 'Node', 'Go', 'PostgreSQL', 'Docker', 'Linux'],
+    stack: ['Odoo', 'Python', 'Go', 'PostgreSQL', 'Docker', 'Linux'],
   },
   {
     company: 'Universidad José Antonio Páez',

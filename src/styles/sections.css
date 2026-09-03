@@ -173,6 +173,9 @@ body.night .night-toggle::after {
 .strip {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  /* La última fila va más alta: la viñeta que la ocupa es ancha, y con 240px
+     el arte se ampliaba tanto que las formas salían recortadas. */
+  grid-template-rows: 240px 240px 340px;
   grid-auto-rows: 240px;
   gap: var(--gutter);
 }
@@ -241,18 +244,22 @@ body.night .night-toggle::after {
 
 .p-recuerdos { grid-column: 1 / 8; grid-row: span 2; }
 .p-gatos { grid-column: 8 / 13; }
-.p-n8n { grid-column: 8 / 13; }
+/* Las dos altas van cruzadas, una a cada lado, para que la tira no quede
+   partida en dos mitades iguales. Una viñeta a todo lo ancho estiraba el arte. */
+.p-n8n { grid-column: 8 / 13; grid-row: 2 / span 2; }
+.p-phone-remote { grid-column: 1 / 8; grid-row: 3; }
 
 @media (max-width: 960px) {
   /* Alto automático: con filas fijas el texto no cabía y el título acababa
      encima del arte y del número de viñeta. */
   .strip {
+    grid-template-rows: none;
     grid-auto-rows: auto;
   }
 
-  .p-recuerdos,
-  .p-gatos,
-  .p-n8n {
+  /* Una viñeta por fila, sin colocación fija: así entra cualquier proyecto
+     nuevo sin tener que escribirle su propia regla. */
+  .strip .panel {
     grid-column: 1 / 13;
     grid-row: auto;
   }

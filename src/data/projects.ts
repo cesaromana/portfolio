@@ -114,8 +114,8 @@ export const projects: Project[] = [
     num: '04',
     title: 'Phone Remote',
     line: bi(
-      'El teléfono como mando de una página web: se escanea un QR y el giroscopio maneja la pantalla grande.',
-      'The phone as a controller for a web page: scan a QR and the gyroscope drives the big screen.',
+      'El teléfono como mando de una página web, por giroscopio y WebRTC.',
+      'The phone as a controller for a web page, over gyroscope and WebRTC.',
     ),
     stack: ['TypeScript', 'WebRTC', 'PeerJS', 'DeviceOrientation', 'Vite', 'Express'],
     year: '2026',
