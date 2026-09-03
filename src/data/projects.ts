@@ -110,9 +110,9 @@ export const projects: Project[] = [
     hue: 'red',
   },
   {
-    id: 'mando',
+    id: 'phone-remote',
     num: '04',
-    title: 'Mando',
+    title: 'Phone Remote',
     line: bi(
       'El teléfono como mando de una página web: se escanea un QR y el giroscopio maneja la pantalla grande.',
       'The phone as a controller for a web page: scan a QR and the gyroscope drives the big screen.',
@@ -120,7 +120,7 @@ export const projects: Project[] = [
     stack: ['TypeScript', 'WebRTC', 'PeerJS', 'DeviceOrientation', 'Vite', 'Express'],
     year: '2026',
     role: bi('Protocolo, calibración y demo', 'Protocol, calibration and demo'),
-    repo: 'https://github.com/cesaromana/mando',
+    repo: 'https://github.com/cesaromana/phone-remote',
     story: [
       bi(
         'Es la pieza que mueve el mando de esta misma página, sacada aparte para que sirva en cualquier sitio. No hay aplicación que instalar: el mando es otra página web, y después del saludo los datos van directo de un aparato al otro.',
