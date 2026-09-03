@@ -1,28 +1,29 @@
 import { useEffect, useRef, useState } from 'react';
-import { iconUrl, ODOO_ICON, tools } from '../data/stack';
+import { byGroup, groupNames, iconUrl, tools, type Group } from '../data/stack';
 import { S } from '../i18n/strings';
 import { useLang } from '../i18n/useLang';
 import { useWall } from '../stack/useWall';
 
-const ODOO = { id: 'odoo', name: 'Odoo', size: 96 };
-const ALL = [...tools, { ...ODOO, group: tools[6].group }];
 // En un teléfono los mismos tamaños se amontonan: se encogen para que se vean todos.
 const NARROW = '(max-width: 720px)';
 const SMALL_SCALE = 0.62;
+const GROUPS: Group[] = ['lang', 'frame', 'data', 'tool'];
 
-/** Muro de herramientas: stickers con física. Empújalos con el mouse, arrástralos y suéltalos. */
+/** Muro de herramientas con física, y debajo la lista ordenada por tipo. */
 export default function Stack() {
   const { t } = useLang();
   const root = useRef<HTMLDivElement>(null);
   const [isNarrow, setNarrow] = useState(() => window.matchMedia(NARROW).matches);
+
   useEffect(() => {
     const mq = window.matchMedia(NARROW);
     const onChange = (e: MediaQueryListEvent) => setNarrow(e.matches);
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
   }, []);
+
   const scale = isNarrow ? SMALL_SCALE : 1;
-  const wall = useWall(root, ALL.map((x) => Math.round(x.size * scale)));
+  const wall = useWall(root, tools.map((x) => Math.round(x.size * scale)));
 
   const grab = (i: number) => (e: React.PointerEvent<HTMLElement>) => {
     const body = wall.bodies[i];
@@ -60,25 +61,28 @@ export default function Stack() {
         <h2>{t(S.stack.title)}</h2>
         <span className="mono">{t(S.stack.sub)}</span>
       </div>
+
       <div className="wall panel" ref={root}>
-        {ALL.map((tool, i) => (
-          <figure
-            key={tool.id}
-            className="sticker"
-            style={{ width: Math.round(tool.size * scale), height: Math.round(tool.size * scale) }}
-            onPointerDown={grab(i)}
-          >
-            {'text' in tool && tool.text ? (
+        {tools.map((tool, i) => (
+          <figure key={tool.id} className="sticker" style={{ width: Math.round(tool.size * scale), height: Math.round(tool.size * scale) }} onPointerDown={grab(i)}>
+            {tool.text ? (
               <span className="sticker__word">{tool.name}</span>
             ) : (
-              <img src={tool.id === 'odoo' ? ODOO_ICON : iconUrl(tool.id)} alt={tool.name} draggable={false} />
+              <img src={iconUrl(tool)} alt={tool.name} draggable={false} />
             )}
-            <figcaption className="mono mono--sm">
-              {tool.name} <i>{t(tool.group)}</i>
-            </figcaption>
+            <figcaption className="mono mono--sm">{tool.name}</figcaption>
           </figure>
         ))}
       </div>
+
+      <dl className="kit">
+        {GROUPS.map((group) => (
+          <div className="kit__row" key={group}>
+            <dt className="mono mono--sm">{t(groupNames[group])}</dt>
+            <dd>{byGroup(group).map((tool) => tool.name).join(' · ')}</dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }

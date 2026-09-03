@@ -330,3 +330,45 @@ footer,
     display: none;
   }
 }
+
+/* ===== La lista de la caja, ordenada por tipo ===== */
+.kit {
+  margin: 32px 0 0;
+  border-top: var(--rule) solid var(--ink);
+}
+
+.kit__row {
+  display: grid;
+  grid-template-columns: minmax(150px, 22%) 1fr;
+  gap: 6px 24px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--dots);
+  transition: padding-left 220ms var(--ease-out);
+}
+
+.kit__row:hover,
+.kit__row.is-focus {
+  padding-left: 10px;
+}
+
+.kit dt {
+  color: var(--ink-soft);
+}
+
+.kit dd {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(15px, 1.5vw, 19px);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+@media (max-width: 720px) {
+  .kit__row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

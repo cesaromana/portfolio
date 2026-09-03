@@ -26,7 +26,9 @@ export function useReveal(root: React.RefObject<HTMLElement | null>, deps: unkno
           io.unobserve(el);
         });
       },
-      { threshold: 0, rootMargin: '0px 0px -12% 0px' },
+      // Margen positivo abajo: empieza justo antes de asomar, así el elemento
+      // llega ya animado en vez de encenderse cuando ya lo estás mirando.
+      { threshold: 0, rootMargin: '0px 0px 12% 0px' },
     );
     items.forEach((el) => io.observe(el));
     return () => io.disconnect();

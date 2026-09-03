@@ -52,16 +52,28 @@ body.night .panel--misreg:hover::after {
   mix-blend-mode: screen;
 }
 
-/* Entrada por barrido lateral (clip-path). Sin fade, sin translateY.
-   Se deja 1px visible: Chrome no reporta intersección si el recorte es total. */
+/* Entrada: aparece y sube. Se anima opacidad y transform, que van por
+   composición y no repintan; el barrido con clip-path costaba mucho más en
+   teléfono y llegaba de golpe. */
 .reveal {
-  clip-path: inset(0 calc(100% - 1px) 0 0);
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
 }
 
 .reveal.is-in {
-  clip-path: inset(0 -14px -14px 0);
-  transition: clip-path 260ms var(--ease-out);
+  opacity: 1;
+  transform: none;
+  transition: opacity 640ms var(--ease-out), transform 720ms var(--ease-flip);
   transition-delay: var(--stagger, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Globo de diálogo con rabo cuadrado. */

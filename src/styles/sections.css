@@ -509,3 +509,22 @@ body.night .night-toggle::after {
     gap: 44px;
   }
 }
+
+/* WhatsApp: que se vea que el número lleva al chat, no que solo está escrito. */
+.reach__wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reach__wa svg {
+  width: 0.9em;
+  height: 0.9em;
+  flex: none;
+}
+
+.reach__hint {
+  display: block;
+  margin-top: 6px;
+  color: var(--ink-soft);
+}

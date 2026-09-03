@@ -8,13 +8,13 @@ export const profile = {
   born: '2002-09-30',
   links: {
     github: 'https://github.com/cesaromana',
-    linkedin: 'https://www.linkedin.com/in/cesar-oma%C3%B1a/',
+    linkedin: 'https://www.linkedin.com/in/cesar-omana',
     instagram: 'https://instagram.com/noescsar',
   },
   cat: 'Brando',
   email: 'cesarluis30902@gmail.com',
   // Venezuela: el 0 inicial se sustituye por el prefijo +58.
-  phone: { dial: '+584145970668', pretty: '+58 414 597 0668' },
+  phone: { dial: '+584145970668', pretty: '+58 414 597 0668', whatsapp: 'https://wa.me/584145970668' },
 };
 
 // Lo que dice el globo del hero. Primera persona, sin poses.

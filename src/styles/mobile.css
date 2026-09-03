@@ -24,7 +24,25 @@
 }
 
 @media (hover: none) {
-  /* La viñeta que cruza el centro de la pantalla se desregistra sola. */
+  /* Sin puntero, el foco lo da el scroll: aquí las transiciones van suaves,
+     no a saltos, porque se disparan mientras la página se está moviendo. */
+  .panel--misreg.is-focus::before,
+  .panel--misreg.is-focus::after,
+  .strip .panel.is-focus .panel__art,
+  .strip .panel.is-focus h3,
+  .cover.is-focus,
+  .film.is-focus .film__poster,
+  .flip.is-focus,
+  .arcade__choice.is-focus {
+    transition-duration: 420ms;
+    transition-timing-function: var(--ease-out);
+  }
+
+  /* Animar el grosor del borde obliga a recalcular el diseño en cada fotograma. */
+  .strip .panel.is-focus {
+    border-width: var(--rule);
+  }
+
   .panel--misreg.is-focus::before {
     border-color: var(--red);
     transform: translateX(2px);
@@ -65,7 +83,7 @@
     background-size: 100% 6px;
   }
 
-  .job.is-focus::before {
+  .jobs > li.is-focus .job::before {
     height: calc(100% - 56px);
   }
 

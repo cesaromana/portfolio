@@ -167,6 +167,10 @@ body.night .cursor {
   border-top: var(--rule) solid var(--ink);
 }
 
+.jobs > li {
+  display: block;
+}
+
 .job {
   display: grid;
   grid-template-columns: 3fr 9fr;
@@ -187,7 +191,8 @@ body.night .cursor {
   transition: height 260ms var(--ease-out);
 }
 
-.job:hover::before {
+.job:hover::before,
+.jobs > li.is-focus .job::before {
   height: calc(100% - 56px);
 }
 
@@ -233,4 +238,117 @@ body.night .cursor {
   color: #16130f;
   padding: 2px 7px;
   margin-bottom: 4px;
+}
+
+/* ===== Expediente desplegable ===== */
+.job__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+
+.job__sign {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  align-self: center;
+}
+
+.job__sign::before,
+.job__sign::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: var(--red);
+}
+
+.job__sign::before {
+  width: 100%;
+  height: 3px;
+}
+
+/* La barra vertical desaparece al abrir: el más se vuelve menos. */
+.job__sign::after {
+  width: 3px;
+  height: 100%;
+  transform: scaleY(1);
+  transition: transform 320ms var(--ease-flip);
+}
+
+.job.is-open .job__sign::after {
+  transform: scaleY(0);
+}
+
+.job__fold {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 420ms var(--ease-flip);
+}
+
+.job.is-open .job__fold {
+  grid-template-rows: 1fr;
+}
+
+.job__foldInner {
+  overflow: hidden;
+  min-height: 0;
+  opacity: 0;
+  transition: opacity 260ms var(--ease-out);
+}
+
+.job.is-open .job__foldInner {
+  opacity: 1;
+  transition-delay: 120ms;
+}
+
+.job__subtitle {
+  margin: 22px 0 12px;
+  color: var(--ink-soft);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.job__list {
+  list-style: none;
+  margin: 0 0 4px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.job__list li {
+  position: relative;
+  padding-left: 26px;
+  max-width: 62ch;
+  font-size: 17px;
+}
+
+.job__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 12px;
+  height: 3px;
+  background: var(--red);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .job__fold,
+  .job__foldInner,
+  .job__sign::after {
+    transition: none;
+  }
 }

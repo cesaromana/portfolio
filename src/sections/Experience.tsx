@@ -1,15 +1,17 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { jobs } from '../data/experience';
 import { useReveal } from '../hooks/useReveal';
 import { useSpotlight } from '../hooks/useSpotlight';
 import { S } from '../i18n/strings';
 import { useLang } from '../i18n/useLang';
+import JobRow from './JobRow';
 
 export default function Experience() {
   const root = useRef<HTMLElement>(null);
   const { t } = useLang();
+  const [open, setOpen] = useState<number | null>(0);
   useReveal(root);
-  useSpotlight(root, '.job');
+  useSpotlight(root, '.jobs > li');
 
   return (
     <section id="experiencia" className="section page" ref={root} data-section>
@@ -19,19 +21,13 @@ export default function Experience() {
       </div>
       <ol className="jobs">
         {jobs.map((job, i) => (
-          <li key={job.company} className={`job reveal${job.kind === 'study' ? ' job--study' : ''}`} data-stagger={i * 60}>
-            <div className="job__when mono">
-              {job.kind === 'study' && <span className="job__kind">{t(S.work.studies)}</span>}
-              <span>{t(job.period)}</span>
-              <span>{t(job.where)}</span>
-            </div>
-            <div className="job__what">
-              <h3>{job.company}</h3>
-              <p className="job__role">{t(job.role)}</p>
-              <p>{t(job.summary)}</p>
-              <span className="mono mono--sm job__stack">{job.stack.join(' · ')}</span>
-            </div>
-          </li>
+          <JobRow
+            key={job.company}
+            job={job}
+            index={i}
+            isOpen={open === i}
+            onToggle={() => setOpen((cur) => (cur === i ? null : i))}
+          />
         ))}
       </ol>
     </section>

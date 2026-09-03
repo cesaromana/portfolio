@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const LERP = 0.22;
+const LERP = 0.42;
 const TARGETS = 'a, button, [data-target]';
 
 /** Cursor propio: un cuadrado de tinta roja que sigue al mouse con retardo y crece sobre los enlaces. */

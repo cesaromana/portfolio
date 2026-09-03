@@ -39,6 +39,7 @@ export const S = {
     title: bi('Expediente', 'Track record'),
     sub: bi('Dónde he trabajado y estudiado', 'Where I have worked and studied'),
     studies: bi('Estudios', 'Education'),
+    what: bi('Qué hice ahí', 'What I did there'),
   },
   play: {
     title: bi('¿Y si tu teléfono fuera el mando?', 'What if your phone were the controller?'),
@@ -190,7 +191,8 @@ export const S = {
   },
   foot: {
     mail: bi('Correo', 'Email'),
-    phone: bi('Teléfono', 'Phone'),
+    phone: bi('WhatsApp', 'WhatsApp'),
+    phoneHint: bi('Escríbeme por WhatsApp', 'Message me on WhatsApp'),
     cat: bi('Supervisado por Brando, el gato.', 'Supervised by Brando, the cat.'),
     made: bi('Hecho a mano con React, sin plantillas.', 'Handmade with React, no templates.'),
   },
