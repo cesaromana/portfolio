@@ -5,7 +5,7 @@ import { useLang } from '../i18n/useLang';
 
 type Props = {
   isNight: boolean;
-  onToggleNight: () => void;
+  onToggleNight: (origin?: { x: number; y: number }) => void;
   isSound: boolean;
   onToggleSound: () => void;
 };
@@ -34,7 +34,10 @@ export default function Topbar({ isNight, onToggleNight, isSound, onToggleSound 
         </button>
         <button
           className="night-toggle"
-          onClick={onToggleNight}
+          onClick={(e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            onToggleNight({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
+          }}
           aria-pressed={isNight}
           aria-label={t(S.top.night)}
           data-tip={isNight ? t(S.top.night) : t(S.top.paper)}

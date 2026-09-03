@@ -3,7 +3,7 @@ import { bi, type Bi } from '../i18n/lang-context';
 // Íconos de skillicons.dev, los mismos del perfil de GitHub.
 export type Group = 'lang' | 'frame' | 'data' | 'tool';
 
-export type Tool = { id: string; name: string; group: Group; size: number; text?: boolean; icon?: string };
+export type Tool = { id: string; name: string; group: Group; size: number; text?: boolean; icon?: string; mark?: string };
 
 export const groupNames: Record<Group, Bi> = {
   lang: bi('Lenguajes', 'Languages'),
@@ -34,7 +34,7 @@ export const tools: Tool[] = [
   { id: 'postgres', name: 'PostgreSQL', group: 'data', size: 106 },
   { id: 'mysql', name: 'MySQL', group: 'data', size: 100 },
   { id: 'redis', name: 'Redis', group: 'data', size: 88 },
-  { id: 'dragonfly', name: 'Dragonfly', group: 'data', size: 92, text: true },
+  { id: 'dragonfly', name: 'Dragonfly', group: 'data', size: 92, mark: 'dragonfly' },
 
   { id: 'docker', name: 'Docker', group: 'tool', size: 101 },
   { id: 'gcp', name: 'Google Cloud', group: 'tool', size: 96 },

@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
+import { flipTheme, type Origin } from '../motion/theme-flip';
 
 const KEY = 'tinta-nocturna';
 
@@ -44,15 +46,23 @@ export function useNight() {
 
   // Sólo el interruptor deja huella: así una visita que no toca nada sigue
   // obedeciendo al aparato la próxima vez.
-  const toggle = useCallback(() => {
-    setNight((n) => {
-      try {
-        localStorage.setItem(KEY, n ? '0' : '1');
-      } catch {
-        /* sin storage, sin drama */
-      }
-      return !n;
-    });
+  //
+  // flushSync obliga a que el repintado ocurra dentro de la transición: si se
+  // dejara al ritmo normal de React, el navegador sacaría la foto del "antes"
+  // y la del "después" con el mismo contenido y no habría nada que animar.
+  const toggle = useCallback((origin?: Origin) => {
+    flipTheme(() => {
+      flushSync(() =>
+        setNight((n) => {
+          try {
+            localStorage.setItem(KEY, n ? '0' : '1');
+          } catch {
+            /* sin storage, sin drama */
+          }
+          return !n;
+        }),
+      );
+    }, origin);
   }, []);
   return { night, toggle };
 }

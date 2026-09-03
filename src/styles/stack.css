@@ -372,3 +372,11 @@ footer,
     gap: 4px;
   }
 }
+
+/* Las marcas dibujadas se pintan con las tintas, así que no llevan el
+   desaturado que sí necesitan los logos de colores. */
+.sticker__mark {
+  width: 70%;
+  height: 70%;
+  pointer-events: none;
+}

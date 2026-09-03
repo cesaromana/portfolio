@@ -125,3 +125,32 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ===== El cambio de tema: la tinta se extiende desde el interruptor ===== */
+
+/* Sin esto el navegador hace su propio fundido encima del nuestro. */
+html.is-flipping::view-transition-old(root),
+html.is-flipping::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* El tema que llega se recorta en círculo y crece; el que se va se queda
+   quieto debajo, que es lo que da la sensación de mancha y no de fundido. */
+html.is-flipping::view-transition-old(root) {
+  z-index: 0;
+}
+
+html.is-flipping::view-transition-new(root) {
+  z-index: 1;
+  animation: ink-flood 620ms var(--ease-flip);
+}
+
+@keyframes ink-flood {
+  from {
+    clip-path: circle(0 at var(--flip-x) var(--flip-y));
+  }
+  to {
+    clip-path: circle(var(--flip-r) at var(--flip-x) var(--flip-y));
+  }
+}

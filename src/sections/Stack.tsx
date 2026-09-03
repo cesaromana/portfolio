@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { marks } from '../data/marks';
 import { byGroup, groupNames, iconUrl, tools, type Group } from '../data/stack';
 import { S } from '../i18n/strings';
 import { useLang } from '../i18n/useLang';
@@ -65,11 +66,9 @@ export default function Stack() {
       <div className="wall panel" ref={root}>
         {tools.map((tool, i) => (
           <figure key={tool.id} className="sticker" style={{ width: Math.round(tool.size * scale), height: Math.round(tool.size * scale) }} onPointerDown={grab(i)}>
-            {tool.text ? (
-              <span className="sticker__word">{tool.name}</span>
-            ) : (
-              <img src={iconUrl(tool)} alt={tool.name} draggable={false} />
-            )}
+            {tool.text && <span className="sticker__word">{tool.name}</span>}
+            {tool.mark && <Mark id={tool.mark} name={tool.name} />}
+            {!tool.text && !tool.mark && <img src={iconUrl(tool)} alt={tool.name} draggable={false} />}
             <figcaption className="mono mono--sm">{tool.name}</figcaption>
           </figure>
         ))}
@@ -84,5 +83,19 @@ export default function Stack() {
         ))}
       </dl>
     </section>
+  );
+}
+
+/** Marca dibujada a mano: el cuerpo va con la tinta y el trazo con el papel. */
+function Mark({ id, name }: { id: string; name: string }) {
+  const mark = marks[id];
+  if (!mark) return null;
+  return (
+    <svg className="sticker__mark" viewBox={mark.viewBox} role="img" aria-label={name}>
+      <path d={mark.body} fill="var(--ink)" />
+      {mark.art.map((d) => (
+        <path key={d} d={d} fill="var(--paper)" />
+      ))}
+    </svg>
   );
 }
