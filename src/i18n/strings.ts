@@ -4,7 +4,7 @@ import { bi } from './lang-context';
 export const S = {
   nav: {
     projects: bi('Proyectos', 'Projects'),
-    work: bi('Expediente', 'Work'),
+    work: bi('Trayectoria', 'Work'),
     play: bi('Juega', 'Play'),
     stack: bi('Herramientas', 'Toolbox'),
     about: bi('Sobre mí', 'About'),
@@ -23,7 +23,7 @@ export const S = {
     years: bi('años', 'years old'),
   },
   projects: {
-    title: bi('La tira', 'The strip'),
+    title: bi('Lo que he construido', 'What I have built'),
     sub: bi('Cuatro viñetas · clic para abrir', 'Four panels · click to open'),
     panel: bi('Viñeta', 'Panel'),
     year: bi('Año', 'Year'),
@@ -36,7 +36,7 @@ export const S = {
     open: bi('Abrir', 'Open'),
   },
   work: {
-    title: bi('Expediente', 'Track record'),
+    title: bi('Trayectoria', 'Track record'),
     sub: bi('Dónde he trabajado y estudiado', 'Where I have worked and studied'),
     studies: bi('Estudios', 'Education'),
     what: bi('Qué hice ahí', 'What I did there'),

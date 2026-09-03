@@ -42,7 +42,7 @@ export function angleDelta(a: number, b: number) {
 export const SECTIONS = [
   { id: 'inicio', label: 'Inicio' },
   { id: 'proyectos', label: 'Proyectos' },
-  { id: 'experiencia', label: 'Expediente' },
+  { id: 'experiencia', label: 'Trayectoria' },
   { id: 'juega', label: 'Juega' },
   { id: 'herramientas', label: 'Herramientas' },
   { id: 'sobre-mi', label: 'Sobre mí' },

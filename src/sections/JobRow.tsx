@@ -5,7 +5,7 @@ import { useLang } from '../i18n/useLang';
 type Props = { job: Job; index: number; isOpen: boolean; onToggle: () => void };
 
 /**
- * Una entrada del expediente, desplegable.
+ * Una entrada de la trayectoria, desplegable.
  *
  * La clase de aparición vive en el <li>, que React nunca reescribe: si se
  * pusiera en el mismo elemento cuyo className cambia al abrir, React lo
